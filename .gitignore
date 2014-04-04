@@ -1,0 +1,3 @@
+/bin
+/target
+/src/main/webapp/WEB-INF/dbConnection.properties
