@@ -25,19 +25,21 @@ public class PersistenceManager {
         try {
             in = new FileInputStream(System.getProperty("WEB-INF/dbConnection.properties"));
             dbProp.load(in);
-        } catch(IOException e) {
+        } catch(Exception e) {
             System.err.println("e:" + e);
         } finally {
             try {
                 in.close();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 //do nothing
             }
         }
         
         MongoJCAConnectionSpec mongoSpec = new MongoJCAConnectionSpec();
-        mongoSpec.setUser(dbProp.getProperty("mongodb.username"));
-        mongoSpec.setPassword(dbProp.getProperty("mongodb.password").toCharArray());
+        mongoSpec.setUser("perkar");
+        mongoSpec.setPassword("supermongo".toCharArray());
+        //mongoSpec.setUser(dbProp.getProperty("mongodb.username"));
+        //mongoSpec.setPassword(dbProp.getProperty("mongodb.password").toCharArray());
          
         MongoConnectionSpec spec = new MongoConnectionSpec();
         spec.setConnectionSpec(mongoSpec);
