@@ -14,7 +14,6 @@ public abstract class Service<T> {
     private Class<T> type;
 
     public Service() {
-        System.out.println("This:" + this.getClass().getName());
         em = PersistenceManager.instance().getFactory().createEntityManager();
         this.type = (Class<T>)
                 ((ParameterizedType)getClass()
