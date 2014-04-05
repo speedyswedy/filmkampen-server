@@ -31,14 +31,14 @@ public abstract class Service<T> {
         em.getTransaction().commit();
     }
 
-    public void remove(int id) {
+    public void remove(String id) {
         BaseEntity emp = find(id);
         if (emp != null) {
             em.remove(emp);
         }
     }
 
-    public BaseEntity find(int id) {
+    public BaseEntity find(String id) {
         return em.find(BaseEntity.class, id);
     }
     
