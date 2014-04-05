@@ -1,7 +1,6 @@
 package com.filmkampen.filmkampen_server.manager;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -21,9 +20,10 @@ public class PersistenceManager {
     
     public PersistenceManager() {
         Properties dbProp=new Properties();
-        FileInputStream in = null;
+        InputStream in = null;
         try {
-            in = new FileInputStream(System.getProperty("WEB-INF/dbConnection.properties"));
+            in = this.getClass().getClassLoader().getResourceAsStream("dbConnection.properties");
+            System.out.println("######in:" + in);
             dbProp.load(in);
         } catch(Exception e) {
             System.err.println("e:" + e);
@@ -36,10 +36,9 @@ public class PersistenceManager {
         }
         
         MongoJCAConnectionSpec mongoSpec = new MongoJCAConnectionSpec();
-        mongoSpec.setUser("perkar");
-        mongoSpec.setPassword("supermongo".toCharArray());
-        //mongoSpec.setUser(dbProp.getProperty("mongodb.username"));
-        //mongoSpec.setPassword(dbProp.getProperty("mongodb.password").toCharArray());
+        System.out.println("########username:" + dbProp.getProperty("mongodb.username"));
+        mongoSpec.setUser(dbProp.getProperty("mongodb.username"));
+        mongoSpec.setPassword(dbProp.getProperty("mongodb.password").toCharArray());
          
         MongoConnectionSpec spec = new MongoConnectionSpec();
         spec.setConnectionSpec(mongoSpec);
