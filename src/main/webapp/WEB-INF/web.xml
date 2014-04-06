@@ -15,6 +15,11 @@
  			org.springframework.web.context.ContextLoaderListener
  		</listener-class>
  	</listener>
+ 	
+ 	<filter>
+    	<filter-name>CorsFilter</filter-name>
+    	<filter-class>com.filmkampen.filmkampen_server.filter.CorsFilter</filter-class>
+  	</filter>
 
 	<servlet>
 		<servlet-name>Jersey REST Service</servlet-name>
