@@ -1,18 +1,7 @@
 package com.filmkampen.filmkampen_server.realm;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.apache.catalina.realm.GenericPrincipal;
-import org.apache.catalina.realm.RealmBase;
-import org.springframework.stereotype.Service;
-
-import com.filmkampen.filmkampen_server.service.UserService;
-
-@Service
+//@Service
 public class MongoRealm {//extends RealmBase {
     
 //    @Resource
