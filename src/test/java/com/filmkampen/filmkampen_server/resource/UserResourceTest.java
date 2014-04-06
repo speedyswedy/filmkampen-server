@@ -1,7 +1,5 @@
 package com.filmkampen.filmkampen_server.resource;
 
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,6 +7,7 @@ import javax.annotation.Resource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -34,6 +33,7 @@ public class UserResourceTest {
     }
 
     @Test
+    @Rollback(true)
     public void testCreateUser() {
         User user = new User();
         user.setFirstName("Ingrid");
