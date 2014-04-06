@@ -4,10 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,12 +19,9 @@ public class UserResourceTest {
     @Resource
     private UserResource userResource;
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
     @Test
     public void testGetUsers() {
+        System.out.println("########");
         List<User> users = userResource.getUsers();
         for (User user : users) {
             System.out.println("User:" + user.getFirstName());
@@ -33,7 +29,7 @@ public class UserResourceTest {
     }
 
     @Test
-    @Rollback(true)
+    @Ignore
     public void testCreateUser() {
         User user = new User();
         user.setFirstName("Ingrid");

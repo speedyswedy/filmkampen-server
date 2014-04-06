@@ -8,10 +8,14 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.persistence.internal.nosql.adapters.mongo.MongoJCAConnectionSpec;
 import org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec;
 
 public class PersistenceManager {
+    
+    private Log LOG = LogFactory.getLog(PersistenceManager.class);
     
     private static PersistenceManager instance = null;
     private static Object lock                 = new Object();
@@ -23,10 +27,9 @@ public class PersistenceManager {
         InputStream in = null;
         try {
             in = this.getClass().getClassLoader().getResourceAsStream("dbConnection.properties");
-            System.out.println("######in:" + in);
             dbProp.load(in);
         } catch(Exception e) {
-            System.err.println("e:" + e);
+            LOG.error("Could not load properties.", e);
         } finally {
             try {
                 in.close();
@@ -36,7 +39,6 @@ public class PersistenceManager {
         }
         
         MongoJCAConnectionSpec mongoSpec = new MongoJCAConnectionSpec();
-        System.out.println("########username:" + dbProp.getProperty("mongodb.username"));
         mongoSpec.setUser(dbProp.getProperty("mongodb.username"));
         mongoSpec.setPassword(dbProp.getProperty("mongodb.password").toCharArray());
          
@@ -45,8 +47,9 @@ public class PersistenceManager {
         Map<String, Object> prop = new HashMap<String, Object>();
         prop.put("eclipselink.nosql.connection-spec", spec);
         
-        
         factory = Persistence.createEntityManagerFactory("filmkampenMongo", prop);
+        
+        LOG.info("Persistence Manager connected");
     }
     
     public static PersistenceManager instance(){
