@@ -10,7 +10,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class CorsFilter implements Filter {
+    
+    private Log LOG = LogFactory.getLog(CorsFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException { }
@@ -22,6 +27,7 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletResponse instanceof HttpServletResponse) {
             HttpServletResponse alteredResponse = ((HttpServletResponse) servletResponse);
+            LOG.info("Add CORS header");
             addHeadersFor200Response(alteredResponse);
         }
         filterChain.doFilter(servletRequest, servletResponse);
