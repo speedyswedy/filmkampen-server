@@ -32,14 +32,14 @@ public abstract class Service<T> {
     }
 
     public void remove(String id) {
-        BaseEntity emp = find(id);
+        T emp = find(id);
         if (emp != null) {
             em.remove(emp);
         }
     }
 
-    public BaseEntity find(String id) {
-        return em.find(BaseEntity.class, id);
+    public T find(String id) {
+        return em.find(this.type, id);
     }
     
     public List<T> list() {

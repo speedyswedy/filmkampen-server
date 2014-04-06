@@ -2,13 +2,14 @@ package com.filmkampen.filmkampen_server.resource;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.filmkampen.filmkampen_server.entity.User;
@@ -20,10 +21,10 @@ import com.filmkampen.filmkampen_server.service.UserService;
 @Produces("application/json")
 public class UserResource {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private MovieService movieService;
 
     @GET
@@ -32,12 +33,14 @@ public class UserResource {
     }
 
     @GET
-    public User find(String id) {
+    @Path("/{id}")
+    public User find(@PathParam("id") String id) {
         return (User) userService.find(id);
     }
     
     @GET
-    public User findByUsername(String username) {
+    @Path("/findUserByUsername/{username}")
+    public User findByUsername(@PathParam("username") String username) {
         return (User) userService.findByUsername(username);
     }
 

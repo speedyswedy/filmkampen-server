@@ -9,5 +9,10 @@ public class UserService extends Service<User> {
     
     public User findByUsername(String username) {
         return (User) em.createQuery("Select u from User u where u.userName = '" + username + "'").getResultList().get(0);
+    }
+    
+    public String getPasswordByUsername(String username) {
+        User user =  (User) em.createQuery("Select u from User u where u.userName = '" + username + "'").getResultList().get(0);
+        return user.getPassword();
     } 
 }
