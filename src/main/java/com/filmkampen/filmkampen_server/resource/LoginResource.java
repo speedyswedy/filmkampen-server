@@ -30,6 +30,8 @@ public class LoginResource {
         User user = userService.findByUsername(credential.getUsername());
         if (user != null) {
             String password = user.getPassword();
+            LOG.info("password:" + password);
+            LOG.info("cred password:" + credential.getPassword());
             if (password != null && password.equals(credential.getPassword())) {
                 String token = "123456qwert";
                 credential.setToken(token);
