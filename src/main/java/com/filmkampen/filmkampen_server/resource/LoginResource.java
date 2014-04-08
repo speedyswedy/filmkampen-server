@@ -30,6 +30,7 @@ public class LoginResource {
     @POST
     public Response login(Credential credential) {
         credential.setToken(null);
+        LOG.info(credential.getUsername());
         User user = userService.findByUsername(credential.getUsername());
         if (user != null) {
             String password = user.getPassword();
