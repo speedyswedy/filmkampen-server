@@ -1,5 +1,8 @@
 package com.filmkampen.filmkampen_server.resource;
 
+import java.util.Calendar;
+import java.util.UUID;
+
 import javax.annotation.Resource;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,7 +36,10 @@ public class LoginResource {
             LOG.info("password:" + password);
             LOG.info("cred password:" + credential.getPassword());
             if (password != null && password.equals(credential.getPassword())) {
-                String token = "123456qwert";
+                Calendar cal = Calendar.getInstance();
+                String token = UUID.randomUUID().toString().toUpperCase() 
+                        + "|" + user.getUserName() + "|"
+                        + cal.getTimeInMillis();;
                 credential.setToken(token);
                 LOG.info("Token is returned.");
             }
