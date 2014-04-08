@@ -8,14 +8,15 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class CorsFilter implements Filter {
+public class TokenFilter implements Filter {
     
-    private Log LOG = LogFactory.getLog(TokenFilter.class);
+    private Log LOG = LogFactory.getLog(CorsFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException { }
@@ -25,17 +26,15 @@ public class CorsFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if (servletResponse instanceof HttpServletResponse) {
+        String token = null;
+        if (servletRequest instanceof HttpServletRequest) {
+             token = ((HttpServletRequest) servletRequest).getHeader("X-Access-Token");
+        }
+        if (servletResponse instanceof HttpServletResponse && token != null) {
             HttpServletResponse alteredResponse = ((HttpServletResponse) servletResponse);
-            LOG.info("Add CORS header");
-            addHeadersFor200Response(alteredResponse);
+            LOG.info("Add token to response header");
+            alteredResponse.addHeader("X-Access-Token", token);
         }
         filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    private void addHeadersFor200Response(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
-        response.addHeader("Access-Control-Allow-Headers", "GET, POST, DELETE, PUT, Content-Type, OPTIONS, X-XSRF-TOKEN");
     }
 }
