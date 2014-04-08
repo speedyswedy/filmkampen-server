@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,7 +25,7 @@ public class LoginResource {
     private UserService userService;
 
     @POST
-    public Credential login(Credential credential) {
+    public Response login(Credential credential) {
         credential.setToken(null);
         User user = userService.findByUsername(credential.getUsername());
         if (user != null) {
@@ -37,9 +38,10 @@ public class LoginResource {
         }
         
         if (credential.getToken() == null) {
-            throw new RuntimeException("No token set.");
+            return Response.status(401).build();
         }
-        return credential;
+        
+        return Response.ok().entity(credential).build();
     }
 
     
