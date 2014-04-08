@@ -27,7 +27,7 @@ public class LoginResource {
     @POST
     public Credential login(Credential credential) {
         credential.setToken(null);
-        User user = userService.findByUsername(credential.getUserName());
+        User user = userService.findByUsername(credential.getUsername());
         if (user != null) {
             String password = user.getPassword();
             if (password != null && password.equals(credential.getPassword())) {
