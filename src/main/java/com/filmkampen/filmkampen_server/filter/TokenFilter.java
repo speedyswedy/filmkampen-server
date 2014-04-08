@@ -28,7 +28,7 @@ public class TokenFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = null;
         if (servletRequest instanceof HttpServletRequest) {
-             token = ((HttpServletRequest) servletRequest).getHeader("access_token");
+             token = ((HttpServletRequest) servletRequest).getHeader("X-Access-Token");
              LOG.info("Got token:" + token);
         }
         if (servletResponse instanceof HttpServletResponse && token != null) {
