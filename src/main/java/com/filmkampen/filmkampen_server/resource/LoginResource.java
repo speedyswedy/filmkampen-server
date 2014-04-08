@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.filmkampen.filmkampen_server.entity.Credential;
 import com.filmkampen.filmkampen_server.entity.User;
-import com.filmkampen.filmkampen_server.manager.PersistenceManager;
 import com.filmkampen.filmkampen_server.service.UserService;
 
 @Path("/login")
@@ -35,6 +34,10 @@ public class LoginResource {
                 credential.setToken(token);
                 LOG.info("Token is returned.");
             }
+        }
+        
+        if (credential.getToken() == null) {
+            throw new RuntimeException("No token set.");
         }
         return credential;
     }
