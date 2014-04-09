@@ -46,10 +46,10 @@ public class LoginResource {
         LOG.info(credential.getUsername());
         User user = userService.findByUsername(credential.getUsername());
         if (user != null) {
-            String password = decode(user.getPassword());
+            String password = user.getPassword();
             
             LOG.info("###############password:" + password);
-            LOG.info("cred password:" + credential.getPassword());
+            LOG.info("###############cred password:" + decode(credential.getPassword()));
             if (password != null && password.equals(credential.getPassword())) {
                 Calendar cal = Calendar.getInstance();
                 String token = UUID.randomUUID().toString().toUpperCase() 
