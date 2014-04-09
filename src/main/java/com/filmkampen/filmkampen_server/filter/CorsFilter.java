@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class CorsFilter implements Filter {
     
-    private Log LOG = LogFactory.getLog(TokenFilter.class);
+    private Log LOG = LogFactory.getLog(CorsFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException { }
@@ -36,7 +36,7 @@ public class CorsFilter implements Filter {
     private void addHeadersFor200Response(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Credentials", "true");
-        response.addHeader("Access-Control-Allow-Methods", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
-        response.addHeader("Access-Control-Allow-Headers", "GET, POST, DELETE, PUT, Content-Type, OPTIONS, X-XSRF-TOKEN, X-Access-Token, Authorization");
+        response.addHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, Content-Type, OPTIONS, X-XSRF-TOKEN, X-Access-Token, Authorization");
     }
 }
