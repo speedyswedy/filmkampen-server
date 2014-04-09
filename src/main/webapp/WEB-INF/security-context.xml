@@ -12,17 +12,9 @@
 	<security:http auto-config='true'>
 	     <security:intercept-url pattern="/rest/user/**" access="ROLE_USER, ROLE_ADMIN"/>
 	     <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-	     <security:http-basic />
-	</security:http>
-	
-	<security:http create-session="stateless"
-        entry-point-ref="authenticationEntryPoint">
-        <security:intercept-url pattern="/api/admin/**" />
-        <security:intercept-url pattern="/medico/**" />
-        <!-- <security:http-basic />  -->
-        <security:custom-filter ref="basicAuthenticationFilter"
+	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
-    </security:http>
+	</security:http>
 
     <bean id="basicAuthenticationFilter"
         class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
