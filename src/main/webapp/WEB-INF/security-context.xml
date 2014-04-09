@@ -35,10 +35,8 @@
         <property name="realmName" value="test.com" />
     </bean> 
 	
-	<security:authentication-manager id="authenticationManager">
-	    <security:authentication-provider user-service-ref="userService">
-	   		<security:password-encoder ref="passwordEncoder" />
-	   	</security:authentication-provider>
+	<security:authentication-manager alias="authenticationManager">
+	    <security:authentication-provider user-service-ref="userService" />
 	</security:authentication-manager>
 	
 	<bean id="userService" class="com.filmkampen.filmkampen_server.service.UserService" />
