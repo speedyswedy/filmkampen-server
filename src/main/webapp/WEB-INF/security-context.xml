@@ -35,7 +35,7 @@
         <property name="realmName" value="test.com" />
     </bean> 
 	
-	<security:authentication-manager>
+	<security:authentication-manager id="authenticationManager">
 	    <security:authentication-provider user-service-ref="userService">
 	   		<security:password-encoder ref="passwordEncoder" />
 	   	</security:authentication-provider>
