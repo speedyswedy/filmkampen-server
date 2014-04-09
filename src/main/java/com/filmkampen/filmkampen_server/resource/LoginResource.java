@@ -50,7 +50,7 @@ public class LoginResource {
             
             LOG.info("###############password:" + password);
             LOG.info("###############cred password:" + decode(credential.getPassword()));
-            if (password != null && password.equals(credential.getPassword())) {
+            if (password != null && password.equals(decode(credential.getPassword()))) {
                 Calendar cal = Calendar.getInstance();
                 String token = UUID.randomUUID().toString().toUpperCase() 
                         + "|" + user.getUserName() + "|"
