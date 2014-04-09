@@ -63,11 +63,7 @@ public class LoginResource {
         if (credential.getToken() == null) {
             return Response.status(401).build();
         }
-        return Response.ok().entity(credential)
-        .header("Access-Control-Allow-Origin", "*")
-        .header("Access-Control-Allow-Credentials", "true")
-        .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, Content-Type, OPTIONS, X-XSRF-TOKEN, X-Access-Token, Authorization")
-        .header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With").build();
+        return Response.ok().entity(credential).build();
     }
     
 }
