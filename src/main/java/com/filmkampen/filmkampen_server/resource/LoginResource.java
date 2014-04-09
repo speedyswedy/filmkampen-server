@@ -1,5 +1,6 @@
 package com.filmkampen.filmkampen_server.resource;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -12,10 +13,12 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.filmkampen.filmkampen_server.entity.Credential;
 import com.filmkampen.filmkampen_server.entity.User;
 import com.filmkampen.filmkampen_server.service.UserService;
+import com.sun.jersey.core.util.Base64;
 
 @Path("/login")
 @Component
@@ -26,15 +29,26 @@ public class LoginResource {
 
     @Resource
     private UserService userService;
+    
+    public String decode(String s) {
+        try {
+            return new String(Base64.decode(s), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            LOG.error("Could not convert string to base 64.", e);
+        }
+        return "";
+    }
 
     @POST
     public Response login(Credential credential) {
+        
         credential.setToken(null);
         LOG.info(credential.getUsername());
         User user = userService.findByUsername(credential.getUsername());
         if (user != null) {
-            String password = user.getPassword();
-            LOG.info("password:" + password);
+            String password = decode(user.getPassword());
+            
+            LOG.info("###############password:" + password);
             LOG.info("cred password:" + credential.getPassword());
             if (password != null && password.equals(credential.getPassword())) {
                 Calendar cal = Calendar.getInstance();
