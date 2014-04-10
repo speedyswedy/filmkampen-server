@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.filmkampen.filmkampen_server.entity.User;
-import com.filmkampen.filmkampen_server.manager.PersistenceManager;
 
 @Component
 public class UserService extends Service<User> implements UserDetailsService {
@@ -21,7 +20,11 @@ public class UserService extends Service<User> implements UserDetailsService {
     private Log LOG = LogFactory.getLog(UserService.class);
     
     public User findByUsername(String username) {
-        return (User) em.createQuery("Select u from User u where u.userName = '" + username + "'").getResultList().get(0);
+        List<User> users = (List<User>) em.createQuery("Select u from User u where u.userName = '" + username + "'").getResultList();
+        if (users.size() > 0) {
+            return users.get(0);
+        }
+        return null;
     }
     
     public String getPasswordByUsername(String username) {
@@ -31,12 +34,11 @@ public class UserService extends Service<User> implements UserDetailsService {
    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("Getting access details from employee dao !!");
+        LOG.info("Getting access details from employee dao !!");
         
         User user = findByUsername(username);
         
-        System.out.println("User:" + user);
-        if (user == null || user.getUserName() != null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Username does not exist");
         }
         
