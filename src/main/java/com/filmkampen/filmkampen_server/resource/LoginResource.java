@@ -39,31 +39,38 @@ public class LoginResource {
         return "";
     }
 
+//    @POST
+//    public Response login(Credential credential) {
+//        
+//        credential.setToken(null);
+//        LOG.info(credential.getUsername());
+//        User user = userService.findByUsername(credential.getUsername());
+//        if (user != null) {
+//            String password = user.getPassword();
+//            
+//            LOG.info("###############password:" + password);
+//            LOG.info("###############cred password:" + decode(credential.getPassword()));
+//            if (password != null && password.equals(decode(credential.getPassword()))) {
+//                Calendar cal = Calendar.getInstance();
+//                String token = UUID.randomUUID().toString().toUpperCase() 
+//                        + "|" + user.getUserName() + "|"
+//                        + cal.getTimeInMillis();;
+//                credential.setToken(token);
+//                LOG.info("Token is returned.");
+//            }
+//        }
+//        
+//        if (credential.getToken() == null) {
+//            return Response.status(401).build();
+//        }
+//        return Response.ok().entity(credential).build();
+//    }
+    
     @POST
-    public Response login(Credential credential) {
+    public Response login() {
         
-        credential.setToken(null);
-        LOG.info(credential.getUsername());
-        User user = userService.findByUsername(credential.getUsername());
-        if (user != null) {
-            String password = user.getPassword();
-            
-            LOG.info("###############password:" + password);
-            LOG.info("###############cred password:" + decode(credential.getPassword()));
-            if (password != null && password.equals(decode(credential.getPassword()))) {
-                Calendar cal = Calendar.getInstance();
-                String token = UUID.randomUUID().toString().toUpperCase() 
-                        + "|" + user.getUserName() + "|"
-                        + cal.getTimeInMillis();;
-                credential.setToken(token);
-                LOG.info("Token is returned.");
-            }
-        }
         
-        if (credential.getToken() == null) {
-            return Response.status(401).build();
-        }
-        return Response.ok().entity(credential).build();
+        return Response.ok().build();
     }
     
 }
