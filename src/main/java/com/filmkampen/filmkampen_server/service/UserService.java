@@ -21,6 +21,8 @@ public class UserService extends Service<User> implements UserDetailsService {
     
     public User findByUsername(String username) {
         List<User> users = (List<User>) em.createQuery("Select u from User u where u.userName = '" + username + "'").getResultList();
+        LOG.info("#######HEEERRRRREE");
+        LOG.info("########HEEERRRRREE:" + users.size());
         if (users.size() > 0) {
             return users.get(0);
         }
@@ -34,10 +36,11 @@ public class UserService extends Service<User> implements UserDetailsService {
    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LOG.info("Getting access details from employee dao !!");
+        LOG.info("########Getting access details from employee dao !!");
         
         User user = findByUsername(username);
         
+        LOG.info("#########Getting:" + user);
         if (user == null) {
             throw new UsernameNotFoundException("Username does not exist");
         }
