@@ -35,7 +35,7 @@ public class UserService extends Service<User> implements UserDetailsService {
         
         User user = findByUsername(username);
         
-        LOG.info("User:" + user);
+        System.out.println("User:" + user);
         if (user == null || user.getUserName() != null) {
             throw new UsernameNotFoundException("Username does not exist");
         }
