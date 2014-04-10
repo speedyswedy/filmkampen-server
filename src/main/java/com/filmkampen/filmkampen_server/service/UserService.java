@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,9 +13,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.filmkampen.filmkampen_server.entity.User;
+import com.filmkampen.filmkampen_server.manager.PersistenceManager;
 
 @Component
 public class UserService extends Service<User> implements UserDetailsService {
+    
+    private Log LOG = LogFactory.getLog(UserService.class);
     
     public User findByUsername(String username) {
         return (User) em.createQuery("Select u from User u where u.userName = '" + username + "'").getResultList().get(0);
@@ -29,6 +34,11 @@ public class UserService extends Service<User> implements UserDetailsService {
         System.out.println("Getting access details from employee dao !!");
         
         User user = findByUsername(username);
+        
+        LOG.info("User:" + user);
+        if (user == null || user.getUserName() != null) {
+            throw new UsernameNotFoundException("Username does not exist");
+        }
         
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority[]{ new SimpleGrantedAuthority("ROLE_USER") }));
         
