@@ -36,7 +36,7 @@ public class CorsFilter implements Filter {
     private void addHeadersFor200Response(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Credentials", "true");
-        response.addHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, X-XSRF-TOKEN, X-Access-Token, Access-Control-Allow-Origin");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, X-XSRF-TOKEN, X-Access-Token, Access-Control-Allow-Origin, Overrite, Destination, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, PROPFIND, PROPPATCH, COPY, MOVE, MKCOL, LOCK, GETLIB, VERSION-ONCTROL, CHECKIN, CHECKOUT, UNCHECKOUT, REPORT, UPDATE, CANCELUPLOAD, HEAD");
     }
 }
