@@ -1,6 +1,7 @@
 package com.filmkampen.filmkampen_server.security;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +15,11 @@ public class PlainTextBasicAuthenticationEntryPoint extends
 
       @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-          response.addHeader("Access-Control-Allow-Origin", "*");
-          response.addHeader("Access-Control-Allow-Credentials", "true");
-          response.addHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, X-XSRF-TOKEN, X-Access-Token, Access-Control-Allow-Origin");
-          response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
+          response.addHeader("Access-Control-Allow-Origin", "null");
+          response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
+          response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+          PrintWriter writer = response.getWriter();
+          writer.println("HTTP Status " + HttpServletResponse.SC_UNAUTHORIZED + " - " + authException.getMessage());
         }
 
 }
