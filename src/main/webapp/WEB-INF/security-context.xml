@@ -10,16 +10,11 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<beans:bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
-    	<security:filter-chain-map path-type="ant">
-        	<security:filter-chain pattern="/**" filters="basicAuthenticationFilter" />
-    	</security:filter-chain-map>
-	</beans:bean>
-
 	<security:http auto-config='true'>
 		 <security:intercept-url method="POST" pattern="/rest/login/**" access="ROLE_USER, ROLE_ADMIN"/>
 	     <security:intercept-url pattern="/rest/user/**" access="ROLE_USER, ROLE_ADMIN"/>
 	     <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	     <security:http-basic />
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
 	</security:http>
