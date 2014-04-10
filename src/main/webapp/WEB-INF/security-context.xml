@@ -29,7 +29,7 @@
         <property name="realmName" value="test.com" />
     </bean> 
 	
-	<security:authentication-manager alias="authenticationManager" erase-credentials="true">
+	<security:authentication-manager alias="authenticationManager">
 	    <security:authentication-provider user-service-ref="userService" />
 	</security:authentication-manager>
 	
