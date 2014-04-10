@@ -23,7 +23,7 @@
     </bean>
 
     <bean id="authenticationEntryPoint" 
-        class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
+        class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
         <property name="realmName" value="test.com" />
     </bean> 
 	
