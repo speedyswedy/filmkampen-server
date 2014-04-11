@@ -24,32 +24,12 @@
 		class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
-		<property name="authenticationSuccessHandler" ref="authenticationSuccessHandler" />
-		<property name="authenticationFailureHandler" ref="authenticationFailureHandler" />
 	</bean>
 
 	<bean id="authenticationEntryPoint"
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
 		<property name="realmName" value="test.com" />
 	</bean>
-	
-	<bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-    	<property name="defaultFailureUrl" value="/rest/login"/>
- 	</bean>
-
-	<bean id="authenticationSuccessHandler"
-		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-		<property name="defaultTargetUrl" value="/rest/login" />
-		<property name="requestCache" ref="requestCache"/>
-	</bean>
-
-	<bean id="requestCacheAwareFilter"
-		class="org.springframework.security.web.savedrequest.RequestCacheAwareFilter">
-		<constructor-arg ref="requestCache" />
-	</bean>
-
-	<bean id="requestCache"
-		class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
 
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
