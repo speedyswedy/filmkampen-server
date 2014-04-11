@@ -9,7 +9,8 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="true">
+	<security:http auto-config="false"
+		entry-point-ref="authenticationProcessingFilterEntryPoint">
 
 		<security:logout logout-url="/resources/j_spring_security_logout"
 			logout-success-url="/logout" invalidate-session="true"
@@ -21,8 +22,10 @@
 		<security:intercept-url pattern="/**"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 
-		<security:custom-filter ref="basicAuthenticationFilter"
-			after="BASIC_AUTH_FILTER" />
+		<!-- <security:custom-filter ref="basicAuthenticationFilter" -->
+		<!-- after="BASIC_AUTH_FILTER" /> -->
+		<security:custom-filter position="FORM_LOGIN_FILTER"
+			ref="authenticationFilter" />
 	</security:http>
 
 	<bean id="basicAuthenticationFilter"
@@ -36,6 +39,25 @@
 		<property name="realmName" value="test.com" />
 	</bean>
 
+	<beans:bean id="authenticationProcessingFilterEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/rest/login" />
+		<beans:property name="forceHttps" value="false" />
+	</beans:bean>
+
+	<beans:bean id="authenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" />
+		<beans:property name="authenticationSuccessHandler"
+			ref="successHandler" />
+	</beans:bean>
+
+	<beans:bean id="successHandler"
+		class="com.filmkampen.filmkampen_server.security.AjaxAuthenticationSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="/login.html" />
+	</beans:bean>
+
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			user-service-ref="userService" />
@@ -43,7 +65,4 @@
 
 	<bean id="userService" class="com.filmkampen.filmkampen_server.service.UserService" />
 
-	<bean
-		class="org.springframework.security.crypto.password.StandardPasswordEncoder"
-		id="passwordEncoder" />
 </beans>
