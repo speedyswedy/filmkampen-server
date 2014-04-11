@@ -25,16 +25,21 @@
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
 		<property name="authenticationSuccessHandler" ref="authenticationSuccessHandler" />
+		<property name="authenticationFailureHandler" ref="aAuthenticationFailureHandler" />
 	</bean>
 
 	<bean id="authenticationEntryPoint"
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
 		<property name="realmName" value="test.com" />
 	</bean>
+	
+	<bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+    	<property name="defaultFailureUrl" value="/views/auth/login?error=true"/>
+ 	</bean>
 
 	<bean id="authenticationSuccessHandler"
 		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
-		<property name="loginFormUrl" value="/rest/login" />
+		<property name="defaultTargetUrl" value="/rest/login" />
 		<property name="requestCache" ref="requestCache"/>
 	</bean>
 
