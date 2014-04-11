@@ -5,6 +5,14 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>Archetype Created Web Application</display-name>
 	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/dispatcher-servlet.xml
+			/WEB-INF/security-context.xml
+		</param-value>
+	</context-param>
+
 	<filter>
     	<filter-name>CorsFilter</filter-name>
     	<filter-class>com.filmkampen.filmkampen_server.filter.CorsFilter</filter-class>
@@ -29,13 +37,6 @@
 	       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/dispatcher-servlet.xml
-			/WEB-INF/security-context.xml
-		</param-value>
-	</context-param>
 	
 	<servlet>
 		<servlet-name>Jersey REST Service</servlet-name>
