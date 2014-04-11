@@ -66,7 +66,7 @@ public class LoginResource {
 //    }
     
     @POST
-    public Response login(@HeaderParam("Authorization") String credentials) {
+    public Response login() {
 //        LOG.info("#########Cred:" + decode(credentials));
 //        String usernameAndPassword = decode(credentials);
 //        String username = usernameAndPassword.split(":")[0];
