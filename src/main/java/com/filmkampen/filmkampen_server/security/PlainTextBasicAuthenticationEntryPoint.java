@@ -15,11 +15,12 @@ public class PlainTextBasicAuthenticationEntryPoint extends
 
       @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-          response.addHeader("Access-Control-Allow-Origin", "null");
+          response.addHeader("Access-Control-Allow-Origin", "*");
           response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
           response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-          PrintWriter writer = response.getWriter();
-          writer.println("HTTP Status " + HttpServletResponse.SC_UNAUTHORIZED + " - " + authException.getMessage());
-        }
+//          PrintWriter writer = response.getWriter();
+//          writer.println("HTTP Status " + HttpServletResponse.SC_UNAUTHORIZED + " - " + authException.getMessage());
+          response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+      }
 
 }
