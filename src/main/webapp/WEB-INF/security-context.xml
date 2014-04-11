@@ -9,9 +9,7 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="true"
-		entry-point-ref="loginUrlAuthenticationEntryPoint"
-		disable-url-rewriting="false">
+	<security:http auto-config="true">
 
 		<security:logout logout-url="/resources/j_spring_security_logout"
 			logout-success-url="/logout" invalidate-session="true"
@@ -26,11 +24,6 @@
 		<security:custom-filter ref="basicAuthenticationFilter"
 			after="BASIC_AUTH_FILTER" />
 	</security:http>
-
-	<beans:bean id="loginUrlAuthenticationEntryPoint"
-		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<beans:property name="loginFormUrl" value="/rest/login" />
-	</beans:bean>
 
 	<bean id="basicAuthenticationFilter"
 		class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
