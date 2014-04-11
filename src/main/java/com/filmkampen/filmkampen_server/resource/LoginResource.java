@@ -1,6 +1,8 @@
 package com.filmkampen.filmkampen_server.resource;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.ws.rs.HeaderParam;
@@ -13,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
+import com.filmkampen.filmkampen_server.entity.User;
 import com.filmkampen.filmkampen_server.service.UserService;
 import com.sun.jersey.core.util.Base64;
 
@@ -64,7 +67,22 @@ public class LoginResource {
     
     @POST
     public Response login(@HeaderParam("Authorization") String credentials) {
-        LOG.info("#########Cred:" + credentials);
+        LOG.info("#########Cred:" + decode(credentials));
+        String usernameAndPassword = decode(credentials);
+        String username = usernameAndPassword.split(":")[0];
+        String password = usernameAndPassword.split(":")[0];
+        
+        User user = userService.findByUsername(username);
+        boolean userExist = false;
+        if (user != null) {
+            if (password != null && password.equals(user.getPassword())) {
+                userExist = true;
+            }
+        }
+  
+        if (!userExist) {
+            return Response.status(401).build();
+        }
         
         return Response.ok().build();
     }
