@@ -67,22 +67,22 @@ public class LoginResource {
     
     @POST
     public Response login(@HeaderParam("Authorization") String credentials) {
-        LOG.info("#########Cred:" + decode(credentials));
-        String usernameAndPassword = decode(credentials);
-        String username = usernameAndPassword.split(":")[0];
-        String password = usernameAndPassword.split(":")[0];
-        
-        User user = userService.findByUsername(username);
-        boolean userExist = false;
-        if (user != null) {
-            if (password != null && password.equals(user.getPassword())) {
-                userExist = true;
-            }
-        }
-  
-        if (!userExist) {
-            return Response.status(401).build();
-        }
+//        LOG.info("#########Cred:" + decode(credentials));
+//        String usernameAndPassword = decode(credentials);
+//        String username = usernameAndPassword.split(":")[0];
+//        String password = usernameAndPassword.split(":")[0];
+//        
+//        User user = userService.findByUsername(username);
+//        boolean userExist = false;
+//        if (user != null) {
+//            if (password != null && password.equals(user.getPassword())) {
+//                userExist = true;
+//            }
+//        }
+//  
+//        if (!userExist) {
+//            return Response.status(401).build();
+//        }
         
         return Response.ok().build();
     }
