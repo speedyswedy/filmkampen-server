@@ -15,26 +15,17 @@
 		<security:logout logout-url="/j_spring_security_logout"
 			logout-success-url="/logout" invalidate-session="true"
 			delete-cookies="JSESSIONID" />
-		<security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
-<!-- 		<security:intercept-url method="POST" pattern="/rest/login/**" -->
-<!-- 			access="ROLE_USER, ROLE_ADMIN" /> -->
-<!-- 		<security:intercept-url pattern="/rest/user/**" -->
-<!-- 			access="ROLE_USER, ROLE_ADMIN" /> -->
-<!-- 		<security:intercept-url pattern="/**" -->
-<!-- 			access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN,ROLE_USER')" />
 
-		<!-- <security:custom-filter ref="basicAuthenticationFilter" -->
-		<!-- after="BASIC_AUTH_FILTER" /> -->
 		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
-<!-- 		<security:custom-filter position="FORM_LOGIN_FILTER" -->
-<!-- 			ref="authenticationFilter" /> -->
+
 	</security:http>
 
-	<bean id="basicAuthenticationFilter"
-		class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
-		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
-	</bean>
+<!-- 	<bean id="basicAuthenticationFilter" -->
+<!-- 		class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter"> -->
+<!-- 		<property name="authenticationManager" ref="authenticationManager" /> -->
+<!-- 		<property name="authenticationEntryPoint" ref="authenticationEntryPoint" /> -->
+<!-- 	</bean> -->
 
 	<bean id="authenticationEntryPoint"
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
