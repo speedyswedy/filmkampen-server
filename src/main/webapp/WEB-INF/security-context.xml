@@ -18,7 +18,6 @@
 		<security:intercept-url pattern="/rest/login" access="hasRole('ROLE_ANONYMOUS')" />
 		<security:intercept-url pattern="/rest/**" access="hasRole('ROLE_ADMIN,ROLE_USER')" />
 		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
-
 	</security:http>
 
 <!-- 	<bean id="basicAuthenticationFilter" -->
