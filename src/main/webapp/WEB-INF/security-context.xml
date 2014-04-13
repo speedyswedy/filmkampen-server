@@ -30,6 +30,8 @@
         authentication-failure-url="/login_error.html"
         default-target-url="/home.html"
         always-use-default-target="true"/>
+        
+      <security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
     </security:http>
         
 <!-- 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint"> -->
