@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private Log LOG = LogFactory.getLog(CorsAwareAuthenticationFilter.class);
+    private Log LOG = LogFactory.getLog(AjaxAuthenticationSuccessHandler.class);
 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException,
             ServletException {
