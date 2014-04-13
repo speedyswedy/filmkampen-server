@@ -21,7 +21,7 @@
 <!-- 		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/> -->
 <!-- 	</security:http> -->
 
-	<security:http entry-point-ref="restAuthenticationEntryPoint">
+	<security:http entry-point-ref="authenticationProcessingFilterEntryPoint">
       <security:intercept-url pattern="/rest/**" access="ROLE_ADMIN"/>
  
       <security:form-login
