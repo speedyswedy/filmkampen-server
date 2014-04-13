@@ -18,7 +18,7 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 	
-		<security:custom-filter ref="corsAuthenticationFilter" before="BASIC_AUTH_FILTER"/>
+		<security:custom-filter ref="corsAuthenticationFilter" after="BASIC_AUTH_FILTER"/>
 		
 	</security:http>
 	
@@ -61,7 +61,7 @@
 <!--    </security:http> -->
 
 	<bean id="ajaxAwareLoginUrlAuthenticationEntryPoint" class="com.filmkampen.filmkampen_server.security.AjaxAwareLoginUrlAuthenticationEntryPoint">
-		<constructor-arg value="/login" />
+		<constructor-arg value="/rest/login" />
 	</bean>
  
    <beans:bean id="myFailureHandler"
