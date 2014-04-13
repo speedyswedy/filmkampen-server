@@ -18,7 +18,7 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 	
-		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+		<security:custom-filter ref="corsAuthenticationFilter" before="BASIC_AUTH_FILTER"/>
 		
 	</security:http>
 	
