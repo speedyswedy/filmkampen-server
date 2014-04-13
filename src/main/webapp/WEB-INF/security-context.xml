@@ -31,7 +31,8 @@
         default-target-url="/home.html"
         always-use-default-target="true"/>
         
-      <security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+        
+      <security:custom-filter ref="corsAuthenticationFilter" before="SECURITY_CONTEXT_FILTER"/>
     </security:http>
         
 <!-- 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint"> -->
@@ -71,6 +72,7 @@
     class="com.filmkampen.filmkampen_server.security.CorsAwareAuthenticationFilter">
     <property name="filterProcessesUrl" value="/j_spring_security_check"/>
     <property name="authenticationManager" ref="authenticationManager"/>
+    
 <!--     <property name="authenticationFailureHandler"> -->
 <!--         <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"> -->
 <!--             <property name="defaultFailureUrl" value="/rest/login?login_error=t"/>        -->
