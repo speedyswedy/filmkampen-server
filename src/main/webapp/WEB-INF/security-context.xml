@@ -9,7 +9,8 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="false">
+	<security:http auto-config="false" use-expressions="true"
+		entry-point-ref="authenticationProcessingFilterEntryPoint">
 
 		<security:logout logout-url="/j_spring_security_logout"
 			logout-success-url="/logout" invalidate-session="true"
