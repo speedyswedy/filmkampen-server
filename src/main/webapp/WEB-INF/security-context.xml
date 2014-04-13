@@ -9,6 +9,15 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+	<security:http disable-url-rewriting="true" use-expressions="true" 
+		entry-point-ref="ajaxAwareLoginUrlAuthenticationEntryPoint"> 
+		<security:form-login 
+			authentication-failure-url="/login?error=1" 
+			login-processing-url="/login/submit"/>
+		<security:logout logout-url="/logout" logout-success-url="/login"/>
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+	</security:http>
 	
 <!-- 	<security:http auto-config="false" use-expressions="true" -->
 <!-- 		entry-point-ref="authenticationProcessingFilterEntryPoint"> -->
@@ -21,19 +30,19 @@
 <!-- 		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/> -->
 <!-- 	</security:http> -->
 
-	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
-<!-- 	<security:intercept-url pattern="/login*" access="ROLE_ANONYMOUS"/> -->
-      <security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
-      <security:form-login
-        login-page="/login.html"
-        login-processing-url="/j_spring_security_check.action"
-        authentication-failure-url="/login_error.html"
-        default-target-url="/home.html"
-        always-use-default-target="true"/>
+<!-- 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint"> -->
+<!--  	<security:intercept-url pattern="/login*" access="ROLE_ANONYMOUS"/>  -->
+<!--       <security:intercept-url pattern="/**" access="ROLE_ADMIN"/> -->
+<!--       <security:form-login -->
+<!--         login-page="/login.html" -->
+<!--         login-processing-url="/j_spring_security_check.action" -->
+<!--         authentication-failure-url="/login_error.html" -->
+<!--         default-target-url="/home.html" -->
+<!--         always-use-default-target="true"/> -->
         
         
-      <security:custom-filter ref="corsAuthenticationFilter" before="BASIC_AUTH_FILTER"/>
-    </security:http>
+<!--       <security:custom-filter ref="corsAuthenticationFilter" before="BASIC_AUTH_FILTER"/> -->
+<!--     </security:http> -->
         
 <!-- 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint"> -->
 <!--       <security:intercept-url pattern="/rest/**" access="ROLE_ADMIN"/> -->
@@ -47,6 +56,10 @@
  
 <!--       <security:logout /> -->
 <!--    </security:http> -->
+
+	<bean id="ajaxAwareLoginUrlAuthenticationEntryPoint" class="Acom.filmkampen.filmkampen_server.security.AjaxAwareLoginUrlAuthenticationEntryPoint">
+		<constructor-arg value="/login" />
+	</bean>
  
    <beans:bean id="myFailureHandler"
       class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
@@ -94,7 +107,7 @@
 		<beans:property name="defaultTargetUrl" value="/rest/login" />
 	</beans:bean>
 
-	<security:authentication-manager alias="authenticationManager">
+	<security:authentication-manager erase-credentials="true" alias="authenticationManager">
 		<security:authentication-provider
 			user-service-ref="userService" />
 	</security:authentication-manager>
