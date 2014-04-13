@@ -29,7 +29,7 @@
          authentication-failure-handler-ref="myFailureHandler"
       />
       
-      <security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+<!--       <security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/> -->
  
       <security:logout />
    </security:http>
@@ -56,11 +56,11 @@
 	
 	<bean id="corsAuthenticationFilter"
     class="com.filmkampen.filmkampen_server.security.CorsAwareAuthenticationFilter">
-    <property name="filterProcessesUrl" value="/resources/j_spring_security_check"/>
+    <property name="filterProcessesUrl" value="/j_spring_security_check"/>
     <property name="authenticationManager" ref="authenticationManager"/>
     <property name="authenticationFailureHandler">
         <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-            <property name="defaultFailureUrl" value="/login?login_error=t"/>       
+            <property name="defaultFailureUrl" value="/rest/login?login_error=t"/>       
         </bean>
     </property>
     <property name="authenticationSuccessHandler" ref="successHandler" />
@@ -75,8 +75,8 @@
 <!-- 	</beans:bean> -->
 
 	<beans:bean id="successHandler"
-		class="com.filmkampen.filmkampen_server.security.AjaxAuthenticationSuccessHandler">
-		<beans:property name="defaultTargetUrl" value="/login.html" />
+		class="com.filmkampen.filmkampen_server.security.AjaxAuthenticationSuccessHandler2">
+		<beans:property name="defaultTargetUrl" value="/rest/login" />
 	</beans:bean>
 
 	<security:authentication-manager alias="authenticationManager">
