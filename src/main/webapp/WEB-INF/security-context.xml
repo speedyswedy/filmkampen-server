@@ -15,7 +15,7 @@
 		<security:logout logout-url="/j_spring_security_logout"
 			logout-success-url="/logout" invalidate-session="true"
 			delete-cookies="JSESSIONID" />
-		<security:intercept-url pattern="/rest/login" access="hasRole('ROLE_ANONYMOUS')" />
+		<security:intercept-url pattern="/rest/login/**" access="hasRole('ROLE_ADMIN,ROLE_USER')" />
 		<security:intercept-url pattern="/rest/**" access="hasRole('ROLE_ADMIN,ROLE_USER')" />
 		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
 	</security:http>
