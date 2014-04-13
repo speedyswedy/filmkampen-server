@@ -29,7 +29,7 @@ public class PlainTextBasicAuthenticationEntryPoint extends
           //response.addHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, X-XSRF-TOKEN, X-Access-Token, Access-Control-Allow-Origin, Overrite, Destination, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, accept");
           //response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, PROPFIND, PROPPATCH, COPY, MOVE, MKCOL, LOCK, GETLIB, VERSION-ONCTROL, CHECKIN, CHECKOUT, UNCHECKOUT, REPORT, UPDATE, CANCELUPLOAD, HEAD");
           response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-          response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,OPTIONS,PUT");
+          response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
           response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
       }
 
