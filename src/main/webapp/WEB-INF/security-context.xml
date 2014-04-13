@@ -57,7 +57,7 @@
 <!--       <security:logout /> -->
 <!--    </security:http> -->
 
-	<bean id="ajaxAwareLoginUrlAuthenticationEntryPoint" class="Acom.filmkampen.filmkampen_server.security.AjaxAwareLoginUrlAuthenticationEntryPoint">
+	<bean id="ajaxAwareLoginUrlAuthenticationEntryPoint" class="com.filmkampen.filmkampen_server.security.AjaxAwareLoginUrlAuthenticationEntryPoint">
 		<constructor-arg value="/login" />
 	</bean>
  
