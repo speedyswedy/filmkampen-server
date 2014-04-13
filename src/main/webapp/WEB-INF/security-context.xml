@@ -29,7 +29,7 @@
          authentication-failure-handler-ref="myFailureHandler"
       />
       
-<!--       <security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/> -->
+		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
  
       <security:logout />
    </security:http>
