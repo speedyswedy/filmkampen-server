@@ -32,7 +32,7 @@
         always-use-default-target="true"/>
         
         
-      <security:custom-filter ref="corsAuthenticationFilter" before="SECURITY_CONTEXT_FILTER"/>
+      <security:custom-filter ref="corsAuthenticationFilter" before="BASIC_AUTH_FILTER"/>
     </security:http>
         
 <!-- 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint"> -->
