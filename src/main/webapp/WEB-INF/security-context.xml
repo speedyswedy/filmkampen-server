@@ -14,8 +14,9 @@
 		<security:form-login 
 			authentication-failure-url="/login?error=1" 
 			login-processing-url="/login/submit"/>
-		<security:logout logout-url="/logout" logout-success-url="/login"/>
+		<security:logout logout-url="/logout"/>
 		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/j_spring_security_check" access="permitAll" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 	
 		<security:custom-filter ref="corsAuthenticationFilter" after="BASIC_AUTH_FILTER"/>
