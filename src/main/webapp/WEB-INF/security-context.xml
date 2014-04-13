@@ -9,13 +9,12 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="false" use-expressions="true"
-		entry-point-ref="authenticationProcessingFilterEntryPoint">
+	<security:http auto-config="false">
 
 		<security:logout logout-url="/j_spring_security_logout"
 			logout-success-url="/logout" invalidate-session="true"
 			delete-cookies="JSESSIONID" />
-		<security:intercept-url pattern="/rest/login/**" access="hasRole('ROLE_ADMIN,ROLE_USER')" />
+		<security:intercept-url pattern="/rest/login/**" access="hasRole('ROLE_ANONYMOUS')" />
 		<security:intercept-url pattern="/rest/**" access="hasRole('ROLE_ADMIN,ROLE_USER')" />
 		<security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
 	</security:http>
