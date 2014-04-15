@@ -10,7 +10,7 @@
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
-        <security:intercept-url pattern="/rest/login" access="ROLE_USER"/>
+        <security:intercept-url pattern="/rest/login" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
 		 <security:custom-filter ref="authenticationProcessingFilter" position="BASIC_AUTH_FILTER" />
 	</security:http>
