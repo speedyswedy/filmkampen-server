@@ -19,9 +19,11 @@
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
 		<property name="realmName" value="test.com" />
 	</bean>
+	
+	
 
 	<beans:bean id="authenticationFilter"
-		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
 		<beans:property name="authenticationManager" ref="authenticationManager" />
 		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" />
 		<beans:property name="authenticationFailureHandler"
