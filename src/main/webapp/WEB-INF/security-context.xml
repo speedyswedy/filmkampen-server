@@ -9,7 +9,7 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="false" use-expressions="true">
+	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
 		 <security:custom-filter ref="authenticationProcessingFilter" before="BASIC_AUTH_FILTER" />
 	</security:http>
@@ -18,8 +18,6 @@
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
 		<property name="realmName" value="filmkampen.com" />
 	</bean>
-	
-	<security:http-basic entry-point-ref="authenticationEntryPoint" />
 	
 	<bean id="authenticationProcessingFilter" class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
         <property name="authenticationManager" ref="authenticationManager" />
