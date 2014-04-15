@@ -11,7 +11,7 @@
 
 	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
-		 <security:custom-filter ref="authenticationProcessingFilter" before="BASIC_AUTH_FILTER" />
+		 <security:custom-filter ref="authenticationProcessingFilter" after="BASIC_AUTH_FILTER" />
 	</security:http>
 
 	<bean id="authenticationEntryPoint"
