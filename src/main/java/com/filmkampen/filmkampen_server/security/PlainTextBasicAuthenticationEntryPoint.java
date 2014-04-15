@@ -1,6 +1,7 @@
 package com.filmkampen.filmkampen_server.security;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,16 @@ public class PlainTextBasicAuthenticationEntryPoint extends
           response.addHeader("Access-Control-Allow-Credentials", "true");
           response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
           response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT,OPTIONS");
-          response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+          response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
+          response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+          PrintWriter writer = response.getWriter();
+          writer.println("HTTP Status 401 - " + authException.getMessage());
+      }
+      
+      @Override
+      public void afterPropertiesSet() throws Exception {
+          setRealmName("filmkampen.com");
+          super.afterPropertiesSet();
       }
 
 }
