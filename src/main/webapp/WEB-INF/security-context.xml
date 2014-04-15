@@ -16,7 +16,7 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
-		<security:custom-filter position="FORM_LOGIN_FILTER"
+		<security:custom-filter after="BASIC_AUTH_FILTER"
 			ref="authenticationFilter" />
 	</security:http>
 
