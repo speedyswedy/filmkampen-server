@@ -11,6 +11,9 @@
 
 	<security:http auto-config="false" use-expressions="true"
 		entry-point-ref="authenticationEntryPoint">
+		
+		<security:intercept-url pattern="/j_spring_security_check"
+			access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="isAuthenticated()" />
 		<security:custom-filter position="FORM_LOGIN_FILTER"
