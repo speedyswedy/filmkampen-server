@@ -22,7 +22,6 @@
 	</bean>
 	
 	<bean id="authenticationProcessingFilter" class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
-        <property name="defaultTargetUrl" value="/main.html" />
         <property name="authenticationManager" ref="authenticationManager" />
     </bean>
 
