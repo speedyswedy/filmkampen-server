@@ -10,8 +10,8 @@
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
-		<security:intercept-url pattern="/login" access="permitAll" />
-		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:intercept-url pattern="/**" access="ROLE_USER"/>
 		<security:custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
 	</security:http>
 
