@@ -22,8 +22,8 @@ public class PlainTextBasicAuthenticationEntryPoint extends
           response.addHeader("Access-Control-Allow-Origin", "*");
           response.addHeader("Access-Control-Allow-Credentials", "true");
           response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-          response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
-          //response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+          response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT,OPTIONS");
+          response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
       }
 
 }
