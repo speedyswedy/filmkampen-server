@@ -12,23 +12,29 @@
 	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
 		<security:intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
         <security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN,ROLE_USER')"/>
-		<security:custom-filter ref="authenticationFilter" before="BASIC_AUTH_FILTER"/>
+	
+		 <security:custom-filter ref="authenticationProcessingFilter" position="BASIC_AUTH_FILTER" />
 	</security:http>
 
 	<bean id="authenticationEntryPoint"
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
 		<property name="realmName" value="test.com" />
 	</bean>
+	
+	<bean id="authenticationProcessingFilter" class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
+        <property name="defaultTargetUrl" value="/main.html" />
+        <property name="authenticationManager" ref="authenticationManager" />
+    </bean>
 
-	<beans:bean id="authenticationFilter"
-		class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
-		<beans:property name="authenticationManager" ref="authenticationManager" />
-		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" />
-		<beans:property name="authenticationFailureHandler"
-			ref="myFailureHandler" />
-		<beans:property name="authenticationSuccessHandler"
-			ref="successHandler" />
-	</beans:bean>
+<!-- 	<beans:bean id="authenticationFilter" -->
+<!-- 		class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter"> -->
+<!-- 		<beans:property name="authenticationManager" ref="authenticationManager" /> -->
+<!-- 		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" /> -->
+<!-- 		<beans:property name="authenticationFailureHandler" -->
+<!-- 			ref="myFailureHandler" /> -->
+<!-- 		<beans:property name="authenticationSuccessHandler" -->
+<!-- 			ref="successHandler" /> -->
+<!-- 	</beans:bean> -->
 
 	<beans:bean id="successHandler"
 		class="com.filmkampen.filmkampen_server.security.SuccessHandler">
