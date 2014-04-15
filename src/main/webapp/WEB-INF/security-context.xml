@@ -10,17 +10,15 @@
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
-		<security:intercept-url pattern="/login" access="permitAll"/>
+		<security:intercept-url pattern="/login" access="hasRole('ROLE_ANONYMOUS')"/>
         <security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN,ROLE_USER')"/>
-		<security:custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
+		<security:custom-filter ref="authenticationFilter" before="BASIC_AUTH_FILTER"/>
 	</security:http>
 
 	<bean id="authenticationEntryPoint"
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
 		<property name="realmName" value="test.com" />
 	</bean>
-	
-	
 
 	<beans:bean id="authenticationFilter"
 		class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
