@@ -15,7 +15,7 @@
     <!-- remove security from static resources to avoid going through the security filter chain -->
     <security:http pattern="/resources/**" security="none" />
     
-	<security:http auto-config="true" use-expressions="true" entry-point-ref="authenticationEntryPoint">
+	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
           <!-- REST services can be secured here, will respond with JSON instead of HTML -->
         <security:intercept-url pattern="/rest/login/**" access="hasRole('ROLE_USER')" />
         <security:intercept-url pattern="/rest/user/**" access="hasRole('ROLE_USER')" />
@@ -41,7 +41,7 @@
 	
 	<!-- http config for regular HTML pages
     =================================================== -->
-    <security:http auto-config="true" use-expressions="true">
+    <security:http auto-config="false" use-expressions="true">
         <security:form-login 
             login-processing-url="/security/j_spring_security_check" 
             login-page="/login" 
