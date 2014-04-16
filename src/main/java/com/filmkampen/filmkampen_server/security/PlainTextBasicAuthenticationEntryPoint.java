@@ -23,7 +23,7 @@ public class PlainTextBasicAuthenticationEntryPoint extends
           response.addHeader("Access-Control-Allow-Origin", "*");
           response.addHeader("Access-Control-Allow-Credentials", "true");
           response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-          response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT,OPTIONS");
+          response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
           response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
           response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
           PrintWriter writer = response.getWriter();

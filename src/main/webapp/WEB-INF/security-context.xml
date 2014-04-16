@@ -22,6 +22,7 @@
 	
 	<bean id="authenticationProcessingFilter" class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
         <property name="authenticationManager" ref="authenticationManager" />
+        <beans:property name="filterProcessesUrl" value="/rest/j_spring_security_check" />
     </bean>
 
 <!-- 	<beans:bean id="authenticationFilter" -->
