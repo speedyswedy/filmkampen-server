@@ -9,11 +9,56 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
-          <security:intercept-url pattern="/rest/login" access="permitAll"/>
-         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
-		 <security:custom-filter ref="authenticationProcessingFilter" after="BASIC_AUTH_FILTER" />
+ 	<!-- a shared request cache is required for multiple http elements -->
+    <beans:bean id="requestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
+
+    <!-- remove security from static resources to avoid going through the security filter chain -->
+    <security:http pattern="/resources/**" security="none" />
+    
+	<security:http auto-config="true" use-expressions="true" entry-point-ref="authenticationEntryPoint">
+          <!-- REST services can be secured here, will respond with JSON instead of HTML -->
+        <security:intercept-url pattern="/rest/login/**" access="hasRole('ROLE_USER')" />
+        <security:intercept-url pattern="/rest/user/**" access="hasRole('ROLE_USER')" />
+
+        <!-- other REST intercept-urls go here -->
+
+        <!-- end it with a catch all -->
+        <security:intercept-url pattern="/rest/**" access="isAuthenticated()" />
+
+        <!-- reference to the shared request cache -->
+        <security:request-cache ref="requestCache"/>
+		 
+		 <security:form-login 
+            login-processing-url="/rest/login" 
+            login-page="/rest/login" 
+            authentication-failure-url="/rest/login" 
+            default-target-url="/rest/login" 
+            always-use-default-target="true" />
+        <security:logout logout-url="/rest/login" />
+		 
+		 <security:custom-filter ref="authenticationProcessingFilter" position="FORM_LOGIN_FILTER" />
 	</security:http>
+	
+	<!-- http config for regular HTML pages
+    =================================================== -->
+    <security:http auto-config="true" use-expressions="true">
+        <security:form-login 
+            login-processing-url="/security/j_spring_security_check" 
+            login-page="/login" 
+            authentication-failure-url="/login?login_error=t" />
+        <security:logout logout-url="/security/j_spring_security_logout" />
+
+        <security:intercept-url pattern="/calendar/**" access="hasRole('ROLE_USER')" />
+
+        <!-- other intercept-urls go here -->
+
+        <!-- in my app's case, the HTML config ends with permitting all users and requiring HTTPS
+             it is always a good idea to send sensitive information like passwords over HTTPS -->
+        <security:intercept-url pattern="/**" access="permitAll" requires-channel="https" />
+
+        <!-- reference to the shared request cache -->
+        <security:request-cache ref="requestCache"/>
+    </security:http>
 
 	<bean id="authenticationEntryPoint"
 		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
