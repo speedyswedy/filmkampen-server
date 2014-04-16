@@ -36,7 +36,7 @@
             always-use-default-target="true" />
         <security:logout logout-url="/rest/login" />
 		 
-		 <security:custom-filter ref="authenticationProcessingFilter" position="FORM_LOGIN_FILTER" />
+		 <security:custom-filter ref="authenticationProcessingFilter" before="BASIC_AUTH_FILTER" />
 	</security:http>
 	
 	<!-- http config for regular HTML pages
