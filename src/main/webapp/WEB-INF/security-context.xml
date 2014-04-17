@@ -1,204 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
- 	<!-- a shared request cache is required for multiple http elements -->
-    <beans:bean id="requestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
-
-    <!-- remove security from static resources to avoid going through the security filter chain -->
-    <security:http pattern="/resources/**" security="none" />
-    
-	<security:http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
-          <!-- REST services can be secured here, will respond with JSON instead of HTML -->
-        <security:intercept-url pattern="/rest/login/**" access="hasRole('ROLE_USER')" />
-        <security:intercept-url pattern="/rest/user/**" access="hasRole('ROLE_USER')" />
-
-        <!-- other REST intercept-urls go here -->
-
-        <!-- end it with a catch all -->
-        <security:intercept-url pattern="/rest/**" access="isAuthenticated()" />
-
-        <!-- reference to the shared request cache -->
-        <security:request-cache ref="requestCache"/>
-		 
-		 <security:form-login 
-            login-processing-url="/rest/login" 
-            login-page="/rest/login" 
-            authentication-failure-url="/rest/login" 
-            default-target-url="/rest/login" 
-            always-use-default-target="true" />
-        <security:logout logout-url="/rest/login" />
-		 
-		 <security:custom-filter ref="authenticationProcessingFilter" before="BASIC_AUTH_FILTER" />
+	<security:http auto-config='true'>
+		 <security:intercept-url pattern="/rest/login/**" access="ROLE_USER, ROLE_ADMIN"/>
+	     <security:intercept-url pattern="/rest/user/**" access="ROLE_USER, ROLE_ADMIN"/>
+	     <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+	     <security:custom-filter ref="basicAuthenticationFilter"
+            after="BASIC_AUTH_FILTER" />
 	</security:http>
 
-	<bean id="authenticationEntryPoint"
-		class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
-		<property name="realmName" value="filmkampen.com" />
-	</bean>
-	
-	<bean id="authenticationProcessingFilter" class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter">
+    <bean id="basicAuthenticationFilter"
+        class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
         <property name="authenticationManager" ref="authenticationManager" />
-        <beans:property name="filterProcessesUrl" value="/rest/j_spring_security_check" />
+        <property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
     </bean>
 
-<!-- 	<beans:bean id="authenticationFilter" -->
-<!-- 		class="com.filmkampen.filmkampen_server.security.MyAuthenticationProcessingFilter"> -->
-<!-- 		<beans:property name="authenticationManager" ref="authenticationManager" /> -->
-<!-- 		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" /> -->
-<!-- 		<beans:property name="authenticationFailureHandler" -->
-<!-- 			ref="myFailureHandler" /> -->
-<!-- 		<beans:property name="authenticationSuccessHandler" -->
-<!-- 			ref="successHandler" /> -->
-<!-- 	</beans:bean> -->
-
-	<beans:bean id="successHandler"
-		class="com.filmkampen.filmkampen_server.security.SuccessHandler">
-		<beans:property name="defaultTargetUrl" value="/rest/login" />
-	</beans:bean>
-
-	<beans:bean id="myFailureHandler"
-		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
-
-	<!-- <security:http disable-url-rewriting="true" -->
-	<!-- use-expressions="true" entry-point-ref="ajaxAwareLoginUrlAuthenticationEntryPoint"> -->
-	<!-- <security:form-login authentication-failure-url="/login?error=1" -->
-	<!-- login-processing-url="/login/submit" /> -->
-	<!-- <security:logout logout-url="/logout" /> -->
-	<!-- <security:intercept-url pattern="/" access="permitAll" /> -->
-	<!-- <security:intercept-url pattern="/j_spring_security_check" -->
-	<!-- access="permitAll" /> -->
-	<!-- <security:intercept-url pattern="/**" -->
-	<!-- access="isAuthenticated()" /> -->
-
-	<!-- <security:custom-filter ref="corsAuthenticationFilter" -->
-	<!-- after="BASIC_AUTH_FILTER" /> -->
-
-	<!-- </security:http> -->
-
-	<!-- <security:http auto-config="false" use-expressions="true" -->
-	<!-- entry-point-ref="authenticationProcessingFilterEntryPoint"> -->
-
-	<!-- <security:logout logout-url="/j_spring_security_logout" -->
-	<!-- logout-success-url="/logout" invalidate-session="true" -->
-	<!-- delete-cookies="JSESSIONID" /> -->
-	<!-- <security:intercept-url pattern="/rest/login/**" access="hasRole('ROLE_ANONYMOUS')" 
-		/> -->
-	<!-- <security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN,ROLE_USER')" 
-		/> -->
-	<!-- <security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/> -->
-	<!-- </security:http> -->
-
-	<!-- <security:http auto-config="false" entry-point-ref="authenticationEntryPoint"> -->
-	<!-- <security:intercept-url pattern="/login*" access="ROLE_ANONYMOUS"/> -->
-	<!-- <security:intercept-url pattern="/**" access="ROLE_ADMIN"/> -->
-	<!-- <security:form-login -->
-	<!-- login-page="/login.html" -->
-	<!-- login-processing-url="/j_spring_security_check.action" -->
-	<!-- authentication-failure-url="/login_error.html" -->
-	<!-- default-target-url="/home.html" -->
-	<!-- always-use-default-target="true"/> -->
-
-
-	<!-- <security:custom-filter ref="corsAuthenticationFilter" before="BASIC_AUTH_FILTER"/> -->
-	<!-- </security:http> -->
-
-	<!-- <security:http auto-config="false" entry-point-ref="authenticationEntryPoint"> -->
-	<!-- <security:intercept-url pattern="/rest/**" access="ROLE_ADMIN"/> -->
-
-	<!-- <security:form-login -->
-	<!-- authentication-success-handler-ref="successHandler" -->
-	<!-- authentication-failure-handler-ref="myFailureHandler" -->
-	<!-- /> -->
-
-	<!-- <security:custom-filter ref="corsAuthenticationFilter" position="FORM_LOGIN_FILTER"/> -->
-
-	<!-- <security:logout /> -->
-	<!-- </security:http> -->
-
-	<!-- <security:bean id="basicProcessingFilter" -->
-	<!-- class="org.springframework.security.ui.basicauth.BasicProcessingFilter"> -->
-	<!-- <security:property name="authenticationManager"> -->
-	<!-- <ref bean="authenticationManager" /> -->
-	<!-- </security:property> -->
-	<!-- <security:property name="authenticationEntryPoint"> -->
-	<!-- <security:ref bean="authenticationEntryPoint" /> -->
-	<!-- </security:property> -->
-	<!-- </security:bean> -->
-
-	<!-- <bean id="authenticationEntryPoint" -->
-	<!-- class="org.springframework.security.ui.basicauth.BasicProcessingFilterEntryPoint"> -->
-	<!-- <property name="realmName" value="My Realm Here" /> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="ajaxAwareLoginUrlAuthenticationEntryPoint" -->
-	<!-- class="com.filmkampen.filmkampen_server.security.AjaxAwareLoginUrlAuthenticationEntryPoint"> -->
-	<!-- <constructor-arg value="/rest/login" /> -->
-	<!-- </bean> -->
-
-
-	<!-- <bean id="basicAuthenticationFilter" -->
-	<!-- class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter"> -->
-	<!-- <property name="authenticationManager" ref="authenticationManager" 
-		/> -->
-	<!-- <property name="authenticationEntryPoint" ref="authenticationEntryPoint" 
-		/> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="authenticationEntryPoint" -->
-	<!-- class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint"> -->
-	<!-- <property name="realmName" value="test.com" /> -->
-	<!-- </bean> -->
-
-	<!-- <beans:bean id="authenticationProcessingFilterEntryPoint" -->
-	<!-- class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"> -->
-	<!-- <beans:property name="loginFormUrl" value="/rest/login" /> -->
-	<!-- <beans:property name="forceHttps" value="false" /> -->
-	<!-- </beans:bean> -->
-
-	<!-- <beans:bean id="corsAuthenticationFilter" -->
-	<!-- class="com.filmkampen.filmkampen_server.security.CorsAwareAuthenticationFilter"> -->
-	<!-- <property name="filterProcessesUrl" value="/j_spring_security_check" 
-		/> -->
-	<!-- <property name="authenticationManager" ref="authenticationManager" 
-		/> -->
-
-	<!-- <property name="authenticationFailureHandler"> -->
-	<!-- <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"> -->
-	<!-- <property name="defaultFailureUrl" value="/rest/login?login_error=t"/> -->
-	<!-- </bean> -->
-	<!-- </property> -->
-	<!-- <property name="authenticationSuccessHandler" ref="successHandler" -->
-	<!-- /> -->
-	<!-- </beans:bean> -->
-
-	<!-- <beans:bean id="authenticationFilter" -->
-	<!-- class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"> -->
-	<!-- <beans:property name="authenticationManager" ref="authenticationManager" 
-		/> -->
-	<!-- <beans:property name="filterProcessesUrl" value="/j_spring_security_check" 
-		/> -->
-	<!-- <beans:property name="authenticationSuccessHandler" -->
-	<!-- ref="successHandler" /> -->
-	<!-- </beans:bean> -->
-
-	<!-- <beans:bean id="successHandler" -->
-	<!-- class="com.filmkampen.filmkampen_server.security.AjaxAuthenticationSuccessHandler2"> -->
-	<!-- <beans:property name="defaultTargetUrl" value="/rest/login" /> -->
-	<!-- </beans:bean> -->
-
+    <bean id="authenticationEntryPoint" 
+        class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+        <property name="realmName" value="test.com" />
+    </bean> 
+	
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider
-			user-service-ref="userService" />
+	    <security:authentication-provider user-service-ref="userService" />
 	</security:authentication-manager>
-
+	
 	<bean id="userService" class="com.filmkampen.filmkampen_server.service.UserService" />
 
+	<bean
+        class="org.springframework.security.crypto.password.StandardPasswordEncoder"
+        id="passwordEncoder" />
 </beans>
