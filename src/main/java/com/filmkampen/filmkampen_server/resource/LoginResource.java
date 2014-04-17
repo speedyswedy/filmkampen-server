@@ -1,11 +1,8 @@
 package com.filmkampen.filmkampen_server.resource;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Calendar;
-import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,8 +11,8 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.filmkampen.filmkampen_server.entity.User;
 import com.filmkampen.filmkampen_server.service.UserService;
 import com.sun.jersey.core.util.Base64;
 
@@ -66,6 +63,7 @@ public class LoginResource {
 //    }
     
     @POST
+    @RequestMapping
     public Response login() {
 //        LOG.info("#########Cred:" + decode(credentials));
 //        String usernameAndPassword = decode(credentials);
