@@ -12,8 +12,8 @@
 	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">
 <!-- 		 <security:intercept-url pattern="/rest/login/**" access="ROLE_USER, ROLE_ADMIN"/> -->
 <!-- 	     <security:intercept-url pattern="/rest/user/**" access="ROLE_USER, ROLE_ADMIN"/> -->
-	     <security:intercept-url pattern="/*" access="permitAll" />
-         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+	
+         <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
 	</security:http>
