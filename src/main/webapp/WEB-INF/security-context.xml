@@ -9,7 +9,7 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config='true'>
+	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">
 		 <security:intercept-url pattern="/rest/login/**" access="ROLE_USER, ROLE_ADMIN"/>
 	     <security:intercept-url pattern="/rest/user/**" access="ROLE_USER, ROLE_ADMIN"/>
 	     <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
@@ -27,7 +27,7 @@
         class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
         <property name="realmName" value="test.com" />
     </bean> 
-	
+    
 	<security:authentication-manager alias="authenticationManager">
 	    <security:authentication-provider user-service-ref="userService" />
 	</security:authentication-manager>
@@ -38,3 +38,35 @@
         class="org.springframework.security.crypto.password.StandardPasswordEncoder"
         id="passwordEncoder" />
 </beans>
+
+
+
+<!-- <http auto-config="false" create-session="stateless"> -->
+<!-- 16 -->
+<!--       <http-basic entry-point-ref="authenticationEntryPoint" /> -->
+<!-- 17 -->
+<!--    </http> -->
+<!-- 18 -->
+ 
+<!-- 19 -->
+<!--    <beans:bean id="authenticationEntryPoint" -->
+<!-- 20 -->
+<!--      class="com.blogspot.vozis.security.VozisBasicAuthenticationEntryPoint"> -->
+<!-- 21 -->
+<!--       <beans:property name="realmName" value="Vozis" /> -->
+<!-- 22 -->
+<!--    </beans:bean> -->
+<!-- 23 -->
+ 
+<!-- 24 -->
+<!--    <authentication-manager alias="authenticationManager"> -->
+<!-- 25 -->
+<!--       <authentication-provider user-service-ref="userService" /> -->
+<!-- 26 -->
+<!--    </authentication-manager> -->
+<!-- 27 -->
+ 
+<!-- 28 -->
+<!--    <beans:bean id="userService" class="com.blogspot.vozis.security.UserServiceImpl" /> -->
+<!-- 29 -->
+<!-- </beans:beans>   -->
