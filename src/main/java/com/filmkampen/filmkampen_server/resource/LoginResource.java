@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.filmkampen.filmkampen_server.service.UserService;
 import com.sun.jersey.core.util.Base64;
@@ -64,7 +65,7 @@ public class LoginResource {
     
     @POST
     @RequestMapping
-    public Response login() {
+    public @ResponseBody Response login() {
 //        LOG.info("#########Cred:" + decode(credentials));
 //        String usernameAndPassword = decode(credentials);
 //        String username = usernameAndPassword.split(":")[0];
