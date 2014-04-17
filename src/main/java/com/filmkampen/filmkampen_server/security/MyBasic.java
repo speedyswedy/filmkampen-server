@@ -26,6 +26,7 @@ public class MyBasic extends BasicAuthenticationFilter {
         response.setStatus(HttpServletResponse.SC_OK);
         PrintWriter writer = response.getWriter();
         writer.println("OK");
+        writer.flush();
     }
 
 }
