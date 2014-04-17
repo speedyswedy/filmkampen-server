@@ -12,14 +12,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
-public class PlainTextBasicAuthenticationEntryPoint extends
-        BasicAuthenticationEntryPoint {
+public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
     
-    private Log LOG = LogFactory.getLog(PlainTextBasicAuthenticationEntryPoint.class);
+    private Log LOG = LogFactory.getLog(MyBasicAuthenticationEntryPoint.class);
 
       @Override
         public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-          LOG.info("############Plain commence");
           response.addHeader("Access-Control-Allow-Origin", "*");
           response.addHeader("Access-Control-Allow-Credentials", "true");
           response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
@@ -29,6 +27,7 @@ public class PlainTextBasicAuthenticationEntryPoint extends
           PrintWriter writer = response.getWriter();
           writer.println("HTTP Status 401 - " + authException.getMessage());
           writer.flush();
+          LOG.info("Returning 401...");
       }
       
       @Override

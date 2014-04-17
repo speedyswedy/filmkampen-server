@@ -68,7 +68,6 @@ public class PersistenceManager {
         return factory;
     }
     
-    
     public void printThis() {
         System.out.println(this);
     }

@@ -28,7 +28,6 @@ public class CorsFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletResponse instanceof HttpServletResponse) {
             HttpServletResponse alteredResponse = ((HttpServletResponse) servletResponse);
-            LOG.info("Add CORS header");
             addHeadersFor200Response(alteredResponse);
         }
         filterChain.doFilter(servletRequest, servletResponse);
@@ -39,8 +38,5 @@ public class CorsFilter implements Filter {
         response.addHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
         response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
-        PrintWriter writer = response.getWriter();
-        writer.println("OK");
-        writer.flush();
     }
 }

@@ -11,14 +11,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-public class MyBasic extends BasicAuthenticationFilter {
+public class MyBasicAuthenticationFilter extends BasicAuthenticationFilter {
 
-    private Log LOG = LogFactory.getLog(MyBasic.class);
+    private Log LOG = LogFactory.getLog(MyBasicAuthenticationFilter.class);
     
     @Override
     protected void onSuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, Authentication authResult)
             throws IOException {
-        LOG.info("###### onSuccessfulAuthentication");
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
@@ -27,6 +26,8 @@ public class MyBasic extends BasicAuthenticationFilter {
         PrintWriter writer = response.getWriter();
         writer.println("OK");
         writer.flush();
+
+        LOG.info("Returning OK...");
     }
 
 }

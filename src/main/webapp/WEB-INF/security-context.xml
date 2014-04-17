@@ -9,20 +9,11 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">
-<!-- 		 <security:intercept-url pattern="/rest/login/**" access="ROLE_USER, ROLE_ADMIN"/> -->
-<!-- 	     <security:intercept-url pattern="/rest/user/**" access="ROLE_USER, ROLE_ADMIN"/> -->
-	
+	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">	
          <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
 	</security:http>
-	
-<!-- 	<bean id="basicAuthenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"> -->
-<!--     	<property name="authenticationManager" ref="authenticationManager"/> -->
-<!--     	<property name="filterProcessesUrl" value="/j_spring_security_check"/> -->
-<!--     	<property name="authenticationSuccessHandler" ref="successHandler"/> -->
-<!-- 	</bean> -->
 
     <bean id="basicAuthenticationFilter"
         class="com.filmkampen.filmkampen_server.security.MyBasic">
@@ -33,11 +24,6 @@
     <bean id="successHandler" class="com.filmkampen.filmkampen_server.security.SuccessHandler">
     	<property name="defaultTargetUrl" value="/login.html"/>
 	</bean>
-
-<!--     <bean id="authenticationEntryPoint"  -->
-<!--         class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint"> -->
-<!--         <property name="realmName" value="test.com" /> -->
-<!--     </bean>  -->
     
     <bean id="authenticationEntryPoint" 
         class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
@@ -54,35 +40,3 @@
         class="org.springframework.security.crypto.password.StandardPasswordEncoder"
         id="passwordEncoder" />
 </beans>
-
-
-
-<!-- <http auto-config="false" create-session="stateless"> -->
-<!-- 16 -->
-<!--       <http-basic entry-point-ref="authenticationEntryPoint" /> -->
-<!-- 17 -->
-<!--    </http> -->
-<!-- 18 -->
- 
-<!-- 19 -->
-<!--    <beans:bean id="authenticationEntryPoint" -->
-<!-- 20 -->
-<!--      class="com.blogspot.vozis.security.VozisBasicAuthenticationEntryPoint"> -->
-<!-- 21 -->
-<!--       <beans:property name="realmName" value="Vozis" /> -->
-<!-- 22 -->
-<!--    </beans:bean> -->
-<!-- 23 -->
- 
-<!-- 24 -->
-<!--    <authentication-manager alias="authenticationManager"> -->
-<!-- 25 -->
-<!--       <authentication-provider user-service-ref="userService" /> -->
-<!-- 26 -->
-<!--    </authentication-manager> -->
-<!-- 27 -->
- 
-<!-- 28 -->
-<!--    <beans:bean id="userService" class="com.blogspot.vozis.security.UserServiceImpl" /> -->
-<!-- 29 -->
-<!-- </beans:beans>   -->

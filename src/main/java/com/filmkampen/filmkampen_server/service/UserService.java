@@ -21,8 +21,6 @@ public class UserService extends Service<User> implements UserDetailsService {
     
     public User findByUsername(String username) {
         List<User> users = (List<User>) em.createQuery("Select u from User u where u.userName = '" + username + "'").getResultList();
-        LOG.info("#######HEEERRRRREE");
-        LOG.info("########HEEERRRRREE:" + users.size());
         if (users.size() > 0) {
             return users.get(0);
         }
@@ -36,17 +34,12 @@ public class UserService extends Service<User> implements UserDetailsService {
    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LOG.info("########Getting access details from employee dao !!");
-        
         User user = findByUsername(username);
-        
-        LOG.info("#########Getting:" + user);
         if (user == null) {
+            LOG.info("User" + username + " not found!");
             throw new UsernameNotFoundException("Username does not exist");
         }
-        
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority[]{ new SimpleGrantedAuthority("ROLE_USER") }));
-        
         UserDetails userDetail = new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), true, true, true, true, authorities);
         return userDetail;
     }
