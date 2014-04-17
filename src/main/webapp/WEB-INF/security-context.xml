@@ -16,6 +16,9 @@
          <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
+            <security:form-login login-page="/login.html"
+        default-target-url="/welcome.html" authentication-failure-url="/loginfailed.html" />
+    <security:logout logout-success-url="/logout.html" />
 	</security:http>
 
     <bean id="basicAuthenticationFilter"

@@ -65,7 +65,6 @@ public class LoginResource {
 //    }
     
     @POST
-    @RequestMapping(value = "log", method = RequestMethod.POST)
     public @ResponseBody Response login() {
 //        LOG.info("#########Cred:" + decode(credentials));
 //        String usernameAndPassword = decode(credentials);
