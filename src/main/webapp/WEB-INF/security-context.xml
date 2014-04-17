@@ -21,10 +21,6 @@
         <property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
     </bean>
     
-    <bean id="successHandler" class="com.filmkampen.filmkampen_server.security.SuccessHandler">
-    	<property name="defaultTargetUrl" value="/login.html"/>
-	</bean>
-    
     <bean id="authenticationEntryPoint" 
         class="com.filmkampen.filmkampen_server.security.MyBasicAuthenticationEntryPoint">
         <property name="realmName" value="test.com" />
