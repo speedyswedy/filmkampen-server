@@ -1,6 +1,7 @@
 package com.filmkampen.filmkampen_server.filter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -33,13 +34,12 @@ public class CorsFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
    
-    private void addHeadersFor200Response(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Credentials", "true");
-        //response.addHeader("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, X-XSRF-TOKEN, X-Access-Token, Access-Control-Allow-Origin, Overrite, Destination, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, accept");
-        //response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, PROPFIND, PROPPATCH, COPY, MOVE, MKCOL, LOCK, GETLIB, VERSION-ONCTROL, CHECKIN, CHECKOUT, UNCHECKOUT, REPORT, UPDATE, CANCELUPLOAD, HEAD");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-        response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
-    
+    private void addHeadersFor200Response(HttpServletResponse response) throws IOException {
+//        response.addHeader("Access-Control-Allow-Origin", "*");
+//        response.addHeader("Access-Control-Allow-Credentials", "true");
+//        response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
+//        response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
+        PrintWriter writer = response.getWriter();
+        writer.println("OK");
     }
 }
