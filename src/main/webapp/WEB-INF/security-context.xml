@@ -23,7 +23,7 @@
     
     <bean id="authenticationEntryPoint" 
         class="com.filmkampen.filmkampen_server.security.MyBasicAuthenticationEntryPoint">
-        <property name="realmName" value="test.com" />
+        <property name="realmName" value="filmkampen.com" />
     </bean> 
     
 	<security:authentication-manager alias="authenticationManager">
