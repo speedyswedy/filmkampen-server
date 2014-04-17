@@ -29,7 +29,7 @@
 <!--     </bean>  -->
     
     <bean id="authenticationEntryPoint" 
-        class="com.filmkampen.filmkampen_server.security.VozisBasicAuthenticationEntryPoint">
+        class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
         <property name="realmName" value="test.com" />
     </bean> 
     
