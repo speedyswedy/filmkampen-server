@@ -41,5 +41,6 @@ public class CorsFilter implements Filter {
         response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
         PrintWriter writer = response.getWriter();
         writer.println("OK");
+        writer.flush();
     }
 }

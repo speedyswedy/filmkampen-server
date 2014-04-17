@@ -28,6 +28,7 @@ public class PlainTextBasicAuthenticationEntryPoint extends
           response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
           PrintWriter writer = response.getWriter();
           writer.println("HTTP Status 401 - " + authException.getMessage());
+          writer.flush();
       }
       
       @Override
