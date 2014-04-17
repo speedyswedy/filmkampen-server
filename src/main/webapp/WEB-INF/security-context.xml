@@ -16,7 +16,7 @@
 	</security:http>
 
     <bean id="basicAuthenticationFilter"
-        class="com.filmkampen.filmkampen_server.security.MyBasic">
+        class="com.filmkampen.filmkampen_server.security.MyBasicAuthenticationFilter">
         <property name="authenticationManager" ref="authenticationManager" />
         <property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
     </bean>
@@ -26,7 +26,7 @@
 	</bean>
     
     <bean id="authenticationEntryPoint" 
-        class="com.filmkampen.filmkampen_server.security.PlainTextBasicAuthenticationEntryPoint">
+        class="com.filmkampen.filmkampen_server.security.MyBasicAuthenticationEntryPoint">
         <property name="realmName" value="test.com" />
     </bean> 
     
