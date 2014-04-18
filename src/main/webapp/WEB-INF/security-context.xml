@@ -14,12 +14,14 @@
     <bean id="requestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
     
 	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">	
-         <security:intercept-url pattern="/#/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-         <security:intercept-url pattern="/#/start" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-         <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
+         <security:intercept-url pattern="/rest/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+         <security:intercept-url pattern="/rest/**" access="ROLE_USER, ROLE_ADMIN" />
 	     
-	     <security:form-login login-page="/#/login" default-target-url="/#/start" authentication-failure-url="/#/start"/>
-         <security:logout logout-success-url="/#/start" />
+<!-- 	     <security:form-login login-page="/#/login" default-target-url="/#/start" authentication-failure-url="/#/start"/> -->
+<!--          <security:logout logout-success-url="/#/start" /> -->
+         
+<!--          <security:form-login login-page="/login" login-processing-url="/j_security_check" authentication-failure-url="/"/> -->
+<!--          <security:logout logout-url="/" delete-cookies="JSESSIONID" /> -->
 	     
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
