@@ -9,7 +9,7 @@ angular.module('Filmkampen')
       
       var success = function (response) {
     	  alert(response);
-          if (response.trim() == "OK" || response.trim() == "") {
+          if (response.trim() == "OK") {
             ApiService.init($scope.credentials);
             SessionService.setUser({"username": $scope.username});
             $cookieStore.put('credentials', $scope.credentials);
