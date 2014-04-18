@@ -16,8 +16,9 @@ angular.module('Filmkampen')
         $timeout(function() {
             $scope.currentTime = player.currentTime;
             $scope.endTime = 0;
+            alert(player.buffered.length);
             if (player.buffered.length > 0) {
-            	$scope.endTime = player.seekable.end();
+            	$scope.endTime = player.seekable.end(0);
             }
             
             if ($scope.currentTime < $scope.endTime) {
