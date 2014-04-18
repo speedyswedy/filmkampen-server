@@ -9,13 +9,16 @@ angular.module('Filmkampen')
     
     $scope.go = function(path) {
         $scope.location.path(path);
-    }
+    };
     
     $scope.progress = function(player) {
         
         $timeout(function() {
             $scope.currentTime = player.currentTime;
-            $scope.endTime = player.seekable.end();
+            $scope.endTime = 0;
+            if (player.buffered().length > 0) {
+            	$scope.endTime = player.seekable.end();
+            }
             
             if ($scope.currentTime < $scope.endTime) {
                 $scope.progress(player);
@@ -28,7 +31,7 @@ angular.module('Filmkampen')
     $scope.startPlayer = function(player) {
         player.play();
         $scope.progress(player);
-    }
+    };
     
     $scope.stopPlayer = function() {
         var player = document.getElementById("video");
