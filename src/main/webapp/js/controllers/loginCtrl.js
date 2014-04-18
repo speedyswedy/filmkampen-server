@@ -8,6 +8,7 @@ angular.module('Filmkampen')
       $scope.credentials = "Basic " + Base64.encode($scope.username + ":" + $scope.password);
       
       var success = function (response) {
+    	  alert(response);
           if (response.trim() == "OK") {
             ApiService.init($scope.credentials);
             SessionService.setUser({"username": $scope.username})
