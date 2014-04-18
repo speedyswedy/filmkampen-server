@@ -15,7 +15,7 @@ angular.module('Filmkampen')
         
         $timeout(function() {
             $scope.currentTime = player.currentTime;
-            $scope.endTime = player.seekable.end(0);
+            $scope.endTime = player.seekable.end();
             
             if ($scope.currentTime < $scope.endTime) {
                 $scope.progress(player);
