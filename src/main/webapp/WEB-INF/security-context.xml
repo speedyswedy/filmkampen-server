@@ -14,6 +14,8 @@
     <bean id="requestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
     
 	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">	
+         <security:intercept-url pattern="/#/login" access="permitAll" />
+         <security:intercept-url pattern="/#/start" access="permitAll" />
          <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
