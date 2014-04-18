@@ -24,7 +24,7 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
               response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
               PrintWriter writer = response.getWriter();
               writer.println("HTTP Status 401 - " + authException.getMessage());
-              writer.flush();
+              
               LOG.info("HTTP AJAX Status 401 - " + authException.getMessage());
 //          }  else {
 //              LOG.info("HTTP Status 401 - " + authException.getMessage());
