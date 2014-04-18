@@ -17,6 +17,10 @@
          <security:intercept-url pattern="/#/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
          <security:intercept-url pattern="/#/start" access="IS_AUTHENTICATED_ANONYMOUSLY" />
          <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
+	     
+	     <security:form-login login-page="/#/login" default-target-url="/#/start" authentication-failure-url="/#/start"/>
+         <security:logout logout-success-url="/#/start" />
+	     
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
 	</security:http>
