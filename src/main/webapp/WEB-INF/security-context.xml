@@ -9,18 +9,41 @@
 		   http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+
+	<!-- a shared request cache is required for multiple http elements -->
+    <bean id="requestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache" />
+    
 	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">	
          <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
 	</security:http>
+	
+	
+ 	<!-- http config for regular HTML pages -->
+<!--     =================================================== --> 
+<!--     <security:http auto-config="true" use-expressions="true"> -->
+<!--         <security:form-login  -->
+<!--             login-processing-url="/security/j_spring_security_check"  -->
+<!--             login-page="/login.html"  -->
+<!--             authentication-failure-url="/login.html?login_error=t" /> -->
+<!--         <security:logout logout-url="/security/j_spring_security_logout" /> -->
 
+<!--         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" /> -->
+        
+<!--         <security:custom-filter ref="basicAuthenticationFilter" -->
+<!--             after="BASIC_AUTH_FILTER" /> -->
+
+<!--         reference to the shared request cache -->
+<!--         <security:request-cache ref="requestCache"/> -->
+<!--     </security:http> -->
+	
     <bean id="basicAuthenticationFilter"
         class="com.filmkampen.filmkampen_server.security.MyBasicAuthenticationFilter">
         <property name="authenticationManager" ref="authenticationManager" />
         <property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
     </bean>
-    
+     
     <bean id="authenticationEntryPoint" 
         class="com.filmkampen.filmkampen_server.security.MyBasicAuthenticationEntryPoint">
         <property name="realmName" value="filmkampen.com" />

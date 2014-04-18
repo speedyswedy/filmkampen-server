@@ -14,20 +14,21 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class MyBasicAuthenticationFilter extends BasicAuthenticationFilter {
 
     private Log LOG = LogFactory.getLog(MyBasicAuthenticationFilter.class);
-    
+
     @Override
     protected void onSuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, Authentication authResult)
             throws IOException {
-//        response.addHeader("Access-Control-Allow-Origin", "*");
-//        response.addHeader("Access-Control-Allow-Credentials", "true");
-//        response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-//        response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
-        response.setStatus(HttpServletResponse.SC_OK);
-        PrintWriter writer = response.getWriter();
-        writer.println("OK");
-        writer.flush();
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            PrintWriter writer = response.getWriter();
+            writer.println("OK");
+            writer.flush();
 
-        LOG.info("Returning OK...");
+            LOG.info("Returning OK...");
+        } else {
+            LOG.info("OK HTTP");
+            super.onSuccessfulAuthentication(request, response, authResult);
+        }
     }
 
 }

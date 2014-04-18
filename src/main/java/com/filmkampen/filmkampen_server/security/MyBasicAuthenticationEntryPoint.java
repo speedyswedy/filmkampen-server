@@ -17,17 +17,19 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
     private Log LOG = LogFactory.getLog(MyBasicAuthenticationEntryPoint.class);
 
       @Override
-        public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-//          response.addHeader("Access-Control-Allow-Origin", "*");
-//          response.addHeader("Access-Control-Allow-Credentials", "true");
-//          response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-//          response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
-          response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
-          response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-          PrintWriter writer = response.getWriter();
-          writer.println("HTTP Status 401 - " + authException.getMessage());
-          writer.flush();
-          LOG.info("Returning 401...");
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
+            throws IOException, ServletException {
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+              response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
+              response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+              PrintWriter writer = response.getWriter();
+              writer.println("HTTP Status 401 - " + authException.getMessage());
+              writer.flush();
+              LOG.info("HTTP AJAX Status 401 - " + authException.getMessage());
+          }  else {
+              LOG.info("HTTP Status 401 - " + authException.getMessage());
+              super.commence(request, response, authException);
+          }
       }
       
       @Override

@@ -1,0 +1,10 @@
+<ng-include src="'views/navigation.html'"></ng-include>
+Current time:{{currentTime}}
+<div class="topcoat-list">
+  <h3 class="topcoat-list__header">Answer:</h3>
+  <ul class="topcoat-list__container">
+    <li ng-click="go('/video');" class="topcoat-list__item {{correct(movie)}}" ng-repeat="movie in movies">
+      {{movie}}
+    </li>
+  </ul>
+</div>

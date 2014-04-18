@@ -1,0 +1,28 @@
+<ng-include src="'views/navigation.html'"></ng-include>
+
+<button ng-click="getCurrentUser()">Get user</button>
+{{user.firstName}}
+
+<button ng-click="getUsers()">Get users</button>
+
+<h3>Users</h3>
+<table class="table table-striped">
+  <tr>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>UserName</th>
+  </tr>
+  <tr ng-repeat="user in users">
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+    <td>{{user.userName}}</td>
+  </tr>
+</table>
+
+<form novalidate class="simple-form">
+    FirstName: <input type="text" ng-model="user.firstName" /><br />
+    LastName: <input type="text" ng-model="user.lastName" /><br />
+    UserName: <input type="text" ng-model="user.userName" /><br />
+    <button ng-click="reset()">RESET</button>
+    <button ng-click="saveUser(user)">SAVE</button>
+</form>
