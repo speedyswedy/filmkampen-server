@@ -59,6 +59,7 @@ public class UserResource {
     }
     
     @POST
+    @Path("/resetPassword")
     public void resetPassword(String email) {
         LOG.info("############" + email);
     }
