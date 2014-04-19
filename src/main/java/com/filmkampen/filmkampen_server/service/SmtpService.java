@@ -45,17 +45,13 @@ public class SmtpService {
         Multipart multipart = new MimeMultipart("alternative");
 
         BodyPart part1 = new MimeBodyPart();
-        part1.setText("This is multipart mail and u read part1......");
-
-        BodyPart part2 = new MimeBodyPart();
-        part2.setContent("<b>This is multipart mail and u read part2......</b>", "text/html");
+        part1.setContent("<b>Your password has been reset to sdkfjdffds</b>", "text/html");
 
         multipart.addBodyPart(part1);
-        multipart.addBodyPart(part2);
 
         message.setContent(multipart);
-        message.setFrom(new InternetAddress("me@myhost.com"));
-        message.setSubject("This is the subject");
+        message.setFrom(new InternetAddress("Film@kampen.com"));
+        message.setSubject("Your password has been reset");
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
         transport.connect();
