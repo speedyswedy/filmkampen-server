@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.filmkampen.filmkampen_server.entity.User;
 import com.filmkampen.filmkampen_server.service.MovieService;
+import com.filmkampen.filmkampen_server.service.SmtpService;
 import com.filmkampen.filmkampen_server.service.UserService;
 
 @Path("/user")
@@ -27,6 +28,9 @@ public class UserResource {
 
     @Resource
     private UserService userService;
+    
+    @Resource
+    private SmtpService smtpService;
 
     @Resource
     private MovieService movieService;
@@ -62,5 +66,10 @@ public class UserResource {
     @Path("/resetPassword")
     public void resetPassword(String email) {
         LOG.info("############" + email);
+        try {
+            smtpService.sendMail(email);
+        } catch (Exception e) {
+            LOG.error("Could not send mail to " + email);
+        }
     }
 }
