@@ -15,7 +15,7 @@
     
 	<security:http auto-config='false' entry-point-ref="authenticationEntryPoint">	
          <security:intercept-url pattern="/rest/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-         <security:intercept-url pattern="/rest/user/resetPassword" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+         <security:intercept-url pattern="/rest/user/resetPassword" access="IS_AUTHENTICATED_ANONYMOUSLY" method="POST" />
          <security:intercept-url pattern="/rest/**" access="ROLE_USER, ROLE_ADMIN" />
 	     
 <!-- 	     <security:form-login login-page="/#/login" default-target-url="/#/start" authentication-failure-url="/#/start"/> -->
