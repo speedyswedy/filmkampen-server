@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import com.filmkampen.filmkampen_server.entity.User;
@@ -20,6 +22,8 @@ import com.filmkampen.filmkampen_server.service.UserService;
 @Component
 @Produces("application/json")
 public class UserResource {
+    
+    private Log LOG = LogFactory.getLog(UserResource.class);
 
     @Resource
     private UserService userService;
@@ -52,5 +56,10 @@ public class UserResource {
     @DELETE
     public void remove(User user) {
         userService.remove(user.getId());
+    }
+    
+    @POST
+    public void resetPassword(String email) {
+        LOG.info("############" + email);
     }
 }

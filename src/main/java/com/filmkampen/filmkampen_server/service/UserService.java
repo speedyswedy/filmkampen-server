@@ -43,4 +43,5 @@ public class UserService extends Service<User> implements UserDetailsService {
         UserDetails userDetail = new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), true, true, true, true, authorities);
         return userDetail;
     }
+    
 }
