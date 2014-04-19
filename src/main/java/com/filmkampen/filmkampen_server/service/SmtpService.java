@@ -15,8 +15,11 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.springframework.stereotype.Component;
+
 import com.filmkampen.filmkampen_server.manager.SmtpManager;
 
+@Component
 public class SmtpService {
 
     private static final String SMTP_HOST_NAME = "smtp.sendgrid.net";
