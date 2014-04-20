@@ -63,5 +63,4 @@ public class Movie extends BaseEntity implements Serializable {
     public void setDirector(String director) {
         this.director = director;
     }
-
 }

@@ -64,5 +64,4 @@ public class User extends BaseEntity implements Serializable {
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
-
 }
