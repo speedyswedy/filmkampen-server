@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
+@XmlRootElement
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class User extends BaseEntity implements Serializable {
