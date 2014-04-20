@@ -22,7 +22,6 @@ public class MyBasicAuthenticationFilter extends BasicAuthenticationFilter {
             response.setStatus(HttpServletResponse.SC_OK);
             PrintWriter writer = response.getWriter();
             writer.println("OK");
-
             LOG.info("Returning OK...");
 //        } else {
 //            LOG.info("OK HTTP");
