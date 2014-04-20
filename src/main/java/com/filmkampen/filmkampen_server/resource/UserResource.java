@@ -54,6 +54,7 @@ public class UserResource {
 
     @POST
     public void createUser(User user) {
+        LOG.info("############create User:" + user.getUserName());
         userService.save(user);
     }
 
