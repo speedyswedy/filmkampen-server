@@ -1,7 +1,7 @@
 <ng-include src="'views/notLoggedInNavigation.html'"></ng-include>
 <div class="center">
-  <h1>Logga in</h1>
-  <form ng-submit="login()">
+  <h1>Nytt konto</h1>
+  <form ng-submit="newAccount()">
       <table>
         <tr>
             <td>Användarnamn:</td>
@@ -13,8 +13,8 @@
         </tr>
       </table>
       <div>&nbsp;</div>
-      <button type="submit" class="topcoat-button--large--cta">Logga in</button>
-  </form>
-  <div>&nbsp;</div>
-  <button ng-click="go('/changePassword')" class="topcoat-button--large--cta">Glömt lösenord?</button>
+      <div class="red_font">{{error}}</div>
+      <div>&nbsp;</div>
+      <button type="submit" class="topcoat-button--large--cta">Spara användare</button>
+  </form> 
 </div>

@@ -26,6 +26,10 @@ progress::-moz-progress-bar {background-color:green}
     background-color:green;
 }
 
+.red_font {
+    color:red;
+}
+
 #video_box {
     float:left;
 }

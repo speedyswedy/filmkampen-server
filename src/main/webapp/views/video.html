@@ -7,6 +7,13 @@
  <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
  <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
  <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
+ <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
+      <object width="100%" height="400" type="application/x-shockwave-flash" data="flashmediaelement.swf">
+          <param name="movie" value="flashmediaelement.swf" />
+          <param name="flashvars" value="controls=true&file=http://video-js.zencoder.com/oceans-clip.mp4" />
+          <!-- Image as a last resort -->
+          <img src="assets/img/myVideo.jpg" width="320" height="240" title="No video playback capabilities" />
+      </object>
 </video>
     <div style="padding:0.5em">
         <progress class="{{colorClass}}" value="{{currentTime}}" max="{{endTime}}"></progress>
@@ -20,10 +27,3 @@
     </li>
   </ul>
 </div>
-<video id="example_video_1" 
-  controls preload="auto" width="320" height="240"
-  poster="http://video-js.zencoder.com/oceans-clip.png" loop>
- <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
- <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
- <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
-</video>
