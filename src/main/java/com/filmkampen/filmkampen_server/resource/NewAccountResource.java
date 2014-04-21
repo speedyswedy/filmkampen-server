@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,6 +33,8 @@ public class NewAccountResource {
         LOG.info("############Create User:" + user.getUserName());
         User existingUser = userService.findByUsername(user.getUserName());
         if (existingUser == null) {
+            StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+            user.setPassword(encoder.encode(user.getPassword()));
             user = (User) userService.save(user);
         } else {
             LOG.info("############Return NULL");
