@@ -11,10 +11,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.filmkampen.filmkampen_server.entity.User;
 import com.filmkampen.filmkampen_server.service.MovieService;
@@ -56,9 +58,15 @@ public class UserResource {
     }
 
     @POST
-    public void createUser(User user) {
+    public @ResponseBody Response createUser(User user) {
         LOG.info("############create User:" + user.getUserName());
-        userService.save(user);
+        User existingUser = findByUsername(user.getUserName());
+        if (existingUser == null) {
+            userService.save(user);
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();   
+        }
+        return Response.ok().build();
     }
 
     @DELETE
