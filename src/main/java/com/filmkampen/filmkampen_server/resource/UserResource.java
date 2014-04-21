@@ -61,7 +61,7 @@ public class UserResource {
     public @ResponseBody Response createUser(User user) {
         LOG.info("############Create User:" + user.getUserName());
         User existingUser = findByUsername(user.getUserName());
-        LOG.info("############Existing User:" + existingUser);
+        LOG.info("###### ######Existing User:" + existingUser);
         if (existingUser == null || existingUser.getUserName() == null) {
             userService.save(user);
         } else {
