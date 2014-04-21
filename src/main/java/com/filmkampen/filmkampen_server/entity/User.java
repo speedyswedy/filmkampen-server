@@ -62,4 +62,5 @@ public class User extends BaseEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+    
 }
