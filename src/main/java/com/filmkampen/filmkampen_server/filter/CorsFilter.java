@@ -1,7 +1,6 @@
 package com.filmkampen.filmkampen_server.filter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -39,4 +38,5 @@ public class CorsFilter implements Filter {
         response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
         response.addHeader("Access-Control-Allow-Methods", "GET,POST,HEAD,PUT");
     }
+    
 }
