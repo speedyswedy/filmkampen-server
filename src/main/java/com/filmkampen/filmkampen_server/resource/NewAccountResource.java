@@ -31,12 +31,13 @@ public class NewAccountResource {
     public @ResponseBody Response createUser(User user) {
         LOG.info("############Create User:" + user.getUserName());
         User existingUser = userService.findByUsername(user.getUserName());
-        LOG.info("###### ######Existing User:" + existingUser);
-        if (existingUser == null || existingUser.getUserName() == null) {
+        if (existingUser == null) {
             user = (User) userService.save(user);
         } else {
+            LOG.info("############Return NULL");
             return Response.ok().entity(null).build();   
         }
+        LOG.info("############Return USER");
         return Response.ok().entity(user).build();
     }
 

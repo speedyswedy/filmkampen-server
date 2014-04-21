@@ -57,19 +57,6 @@ public class UserResource {
         return (User) userService.findByUsername(username);
     }
 
-    @POST
-    public @ResponseBody Response createUser(User user) {
-        LOG.info("############Create User:" + user.getUserName());
-        User existingUser = findByUsername(user.getUserName());
-        LOG.info("###### ######Existing User:" + existingUser);
-        if (existingUser == null || existingUser.getUserName() == null) {
-            userService.save(user);
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();   
-        }
-        return Response.ok().build();
-    }
-
     @DELETE
     public void remove(User user) {
         userService.remove(user.getId());
