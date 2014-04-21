@@ -36,8 +36,7 @@ public class UserResourceTest {
 
     @Test
     public void testRemove() {
-        
-        
+          
     }
 
 }
