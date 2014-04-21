@@ -27,16 +27,6 @@ public class UserResourceTest {
             System.out.println("User:" + user.getFirstName());
         }
     }
-
-    @Test
-    @Ignore
-    public void testCreateUser() {
-        User user = new User();
-        user.setFirstName("Ingrid");
-        user.setLastName("Larsson");
-        user.setUserName("inge");
-        userResource.createUser(user);
-    }
     
     @Test
     public void findUserByUserName() {
