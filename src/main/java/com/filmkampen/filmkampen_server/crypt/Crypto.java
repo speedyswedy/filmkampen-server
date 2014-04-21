@@ -17,5 +17,4 @@ public class Crypto {
         textEncryptor.setPassword(KEY);
         return textEncryptor.decrypt(value);
     }
-
 }
