@@ -36,11 +36,12 @@ public class UserService extends Service<User> implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
         if (user == null) {
-            LOG.info("User" + username + " not found!");
+            LOG.info("User " + username + " not found!");
             throw new UsernameNotFoundException("Username does not exist");
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority[]{ new SimpleGrantedAuthority("ROLE_USER") }));
         UserDetails userDetail = new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), true, true, true, true, authorities);
+        LOG.info("#############password:" + user.getPassword());
         return userDetail;
     }
     
