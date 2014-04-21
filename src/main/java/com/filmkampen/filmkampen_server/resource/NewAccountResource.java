@@ -33,11 +33,11 @@ public class NewAccountResource {
         User existingUser = userService.findByUsername(user.getUserName());
         LOG.info("###### ######Existing User:" + existingUser);
         if (existingUser == null || existingUser.getUserName() == null) {
-            userService.save(user);
+            user = (User) userService.save(user);
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();   
+            return Response.ok().entity(null).build();   
         }
-        return Response.ok().build();
+        return Response.ok().entity(user).build();
     }
 
 }

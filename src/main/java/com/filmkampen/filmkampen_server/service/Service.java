@@ -21,7 +21,7 @@ public abstract class Service<T> {
                 .getActualTypeArguments()[0];
     }
 
-    public void save(BaseEntity entity) {
+    public BaseEntity save(BaseEntity entity) {
         em.getTransaction().begin();
         if (null == entity.getId()) {
             em.persist(entity);
@@ -29,6 +29,7 @@ public abstract class Service<T> {
             em.merge(entity);
         }
         em.getTransaction().commit();
+        return entity;
     }
 
     public void remove(String id) {
