@@ -35,7 +35,7 @@ public class NewAccountResource {
             user = (User) userService.save(user);
         } else {
             LOG.info("############Return NULL");
-            return Response.ok().entity(null).build();   
+            return Response.ok().entity(null).header("entity", null).build();   
         }
         LOG.info("############Return USER");
         return Response.ok().entity(user).build();
