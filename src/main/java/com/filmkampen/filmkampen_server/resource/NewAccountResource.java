@@ -6,10 +6,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.filmkampen.filmkampen_server.entity.User;
 import com.filmkampen.filmkampen_server.service.UserService;
@@ -26,9 +28,16 @@ public class NewAccountResource {
     private UserService userService;
     
     @POST
-    public void createUser(User user) {
-        LOG.info("############create User:" + user.getUserName());
-        userService.save(user);
+    public @ResponseBody Response createUser(User user) {
+        LOG.info("############Create User:" + user.getUserName());
+        User existingUser = userService.findByUsername(user.getUserName());
+        LOG.info("###### ######Existing User:" + existingUser);
+        if (existingUser == null || existingUser.getUserName() == null) {
+            userService.save(user);
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();   
+        }
+        return Response.ok().build();
     }
 
 }
