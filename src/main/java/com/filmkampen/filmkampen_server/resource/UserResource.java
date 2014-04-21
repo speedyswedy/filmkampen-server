@@ -59,7 +59,7 @@ public class UserResource {
 
     @POST
     public @ResponseBody Response createUser(User user) {
-        LOG.info("############create User:" + user.getUserName());
+        LOG.info("############Create User:" + user.getUserName());
         User existingUser = findByUsername(user.getUserName());
         LOG.info("############Existing User:" + existingUser);
         if (existingUser == null || existingUser.getUserName() == null) {
