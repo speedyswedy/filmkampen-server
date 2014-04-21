@@ -27,6 +27,7 @@ public class MyBasicAuthenticationFilter extends BasicAuthenticationFilter {
 //            LOG.info("OK HTTP");
 //            super.onSuccessfulAuthentication(request, response, authResult);
 //        }
+    
     }
 
 }
