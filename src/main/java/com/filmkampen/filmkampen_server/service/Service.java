@@ -48,5 +48,5 @@ public abstract class Service<T> {
         em.getTransaction().commit();
         return entities;
     }
-    
+
 }
