@@ -60,12 +60,14 @@
     </bean> 
     
 	<security:authentication-manager alias="authenticationManager">
-	    <security:authentication-provider user-service-ref="userService" />
+	    <security:authentication-provider user-service-ref="userService">
+	    	<security:password-encoder ref="passwordEncoder" />   
+	    </security:authentication-provider>
 	</security:authentication-manager>
 	
-	<bean id="userService" class="com.filmkampen.filmkampen_server.service.UserService" />
+	<bean id="userService" class="com.filmkampen.filmkampen_server.service.UserService" />	
 
-	<bean
-        class="org.springframework.security.crypto.password.StandardPasswordEncoder"
-        id="passwordEncoder" />
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
+        
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 </beans>
