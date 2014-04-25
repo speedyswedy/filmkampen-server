@@ -17,36 +17,15 @@
          <security:intercept-url pattern="/rest/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
          <security:intercept-url pattern="/rest/newAccount" access="IS_AUTHENTICATED_ANONYMOUSLY" />
          <security:intercept-url pattern="/rest/user/resetPassword" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-         <security:intercept-url pattern="/rest/**" access="ROLE_USER, ROLE_ADMIN" />
-	     
-<!-- 	     <security:form-login login-page="/#/login" default-target-url="/#/start" authentication-failure-url="/#/start"/> -->
-<!--          <security:logout logout-success-url="/#/start" /> -->
          
-<!--          <security:form-login login-page="/login" login-processing-url="/j_security_check" authentication-failure-url="/"/> -->
-<!--          <security:logout logout-url="/" delete-cookies="JSESSIONID" /> -->
-	     
+         <security:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+         <security:intercept-url pattern="/start" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+         
+         <security:intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
+	    
 	     <security:custom-filter ref="basicAuthenticationFilter"
             after="BASIC_AUTH_FILTER" />
 	</security:http>
-	
-	
- 	<!-- http config for regular HTML pages -->
-<!--     =================================================== --> 
-<!--     <security:http auto-config="true" use-expressions="true"> -->
-<!--         <security:form-login  -->
-<!--             login-processing-url="/security/j_spring_security_check"  -->
-<!--             login-page="/login.html"  -->
-<!--             authentication-failure-url="/login.html?login_error=t" /> -->
-<!--         <security:logout logout-url="/security/j_spring_security_logout" /> -->
-
-<!--         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" /> -->
-        
-<!--         <security:custom-filter ref="basicAuthenticationFilter" -->
-<!--             after="BASIC_AUTH_FILTER" /> -->
-
-<!--         reference to the shared request cache -->
-<!--         <security:request-cache ref="requestCache"/> -->
-<!--     </security:http> -->
 	
     <bean id="basicAuthenticationFilter"
         class="com.filmkampen.filmkampen_server.security.MyBasicAuthenticationFilter">

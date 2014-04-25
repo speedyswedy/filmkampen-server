@@ -12,15 +12,15 @@ angular.module('Filmkampen')
     }
     
     $scope.progress = function(player) {
-        
-        $timeout(function() {
-            $scope.currentTime = player.currentTime;
-            $scope.endTime = player.seekable.end(0);
-            if ($scope.currentTime < $scope.endTime) {
-                $scope.progress(player);
-            }
-        
-        }, 100);
+            $timeout(function() {
+                $scope.currentTime = player.currentTime;
+                $scope.endTime = player.seekable.end(0);
+                if ($scope.currentTime < $scope.endTime) {
+                    $scope.progress(player);
+                }
+            
+            }, 100);
+       
        
     };
     

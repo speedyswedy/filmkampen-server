@@ -16,7 +16,6 @@ angular.module('Filmkampen')
   $scope.newAccount = function () {
       
       var success = function (response) {
-          alert("success:" + $scope.username);
           LoginService.login($scope.username, $scope.password);
       };
       

@@ -47,6 +47,10 @@ angular.module('Filmkampen', ['ngRoute','dropbox','ngResource','ngCookies'])
         templateUrl: 'views/loggedOut.html',
         controller: 'LogoutCtrl'
       })
+      .when('/admin/addVideo', {
+        templateUrl: 'views/admin/addVideo.html',
+        controller: 'AddVideoCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -14,6 +14,12 @@
     padding-right: 1%;
 }
 
+.centerDiv {
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
+}
+
 progress {background-color:blue}
 
 progress::-webkit-progress-bar-value, progress::-webkit-progress-value,
@@ -36,8 +42,8 @@ progress::-moz-progress-bar {background-color:green}
 #video_overlays {
     position:absolute;
     float:left;
-    width:320px;
-    height:240px;
+    width:260px;
+    height:200px;
     background-color:#000;
     z-index:300000;
     opacity:0.0;

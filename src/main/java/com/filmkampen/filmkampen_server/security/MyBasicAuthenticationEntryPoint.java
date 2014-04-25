@@ -19,17 +19,12 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
       @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
-        //if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
               response.addHeader("WWW-Authenticate", "Basic realm=\"" + getRealmName() + "\"");
               response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
               PrintWriter writer = response.getWriter();
               writer.println("HTTP Status 401 - " + authException.getMessage());
-              
               LOG.info("HTTP AJAX Status 401 - " + authException.getMessage());
-//          }  else {
-//              LOG.info("HTTP Status 401 - " + authException.getMessage());
-//              super.commence(request, response, authException);
-//          }
+              super.commence(request, response, authException);
       }
       
       @Override

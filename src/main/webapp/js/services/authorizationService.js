@@ -7,6 +7,10 @@ angular.module('Filmkampen')
       login: function (credentials) {
           $http.defaults.headers.common['Authorization'] = credentials;
           return $http.post('http://filmkampen-server.herokuapp.com/rest/login');
+      },
+      logout: function (credentials) {
+          $http.defaults.headers.common['Authorization'] = credentials;
+          return $http.post('http://filmkampen-server.herokuapp.com/rest/login');
       }
   };
 });

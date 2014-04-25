@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Filmkampen')
-  .controller('LogoutCtrl', function ($scope, $http, $location, $cookieStore) {
+  .controller('LogoutCtrl', function ($scope, $http, $location, $cookieStore, LogoutService) {
   
   $scope.location = $location;
   
@@ -11,6 +11,7 @@ angular.module('Filmkampen')
   
   $scope.logout = function () {
       $cookieStore.put('credentials', "");
+      LogoutService.logout("");
   };
   
   $scope.logout();

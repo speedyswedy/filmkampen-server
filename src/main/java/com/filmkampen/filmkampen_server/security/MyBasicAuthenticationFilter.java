@@ -18,16 +18,14 @@ public class MyBasicAuthenticationFilter extends BasicAuthenticationFilter {
     @Override
     protected void onSuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, Authentication authResult)
             throws IOException {
-        //if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+       
             response.setStatus(HttpServletResponse.SC_OK);
             PrintWriter writer = response.getWriter();
             writer.println("OK");
+            writer.flush();
             LOG.info("Returning OK...");
-//        } else {
-//            LOG.info("OK HTTP");
-//            super.onSuccessfulAuthentication(request, response, authResult);
-//        }
-    
+           super.onSuccessfulAuthentication(request, response, authResult);
+
     }
 
 }

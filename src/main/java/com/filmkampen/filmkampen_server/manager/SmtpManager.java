@@ -49,6 +49,10 @@ public class SmtpManager {
         return Crypto.decrypt(dbProp.getProperty("smtp.password"));
     }
     
+    public void setPassword(String password) {
+        Crypto.encrypt(password);
+    }
+    
     public static void main(String[] args) {
         SmtpManager smtpManager = new SmtpManager();
         System.out.println(smtpManager.getPassword());
