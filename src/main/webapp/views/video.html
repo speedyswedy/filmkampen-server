@@ -6,12 +6,51 @@
         <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
         <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />
     </video-->
-    <video id="video" width="260" height="200" preload="none"
-        poster="https://s3.amazonaws.com/filmkampen/36a244f353c12b7ca6458034128d067d_4.jpg">
-        <source src="https://s3.amazonaws.com/filmkampen/30d1253c2e7623b57985145c39cfd639.mp4" type="video/mp4">
-        <source src="https://s3.amazonaws.com/filmkampen/bba8038ad965e1add29622bf611c8258.ogv" type="video/ogg">
-        <source src="https://s3.amazonaws.com/filmkampen/826f409bdd8f2a6ff6cb6c07552efe48.webm" type="video/webm">
-    </video>
+   
+    <!--div videogular vg-width="{{config.width}}" vg-height="{{config.height}}">
+        <video class='videoPlayer' preload='none' ng-model="media">
+            <source ng-src='{{ media.url }}' type='{{ media.type }}'>
+        </video>
+    </div-->
+    
+    <!--div videogular vg-width="config.width" vg-height="config.height" vg-theme="config.theme">
+        <video class='videoPlayer' preload='none'>
+            <source ng-repeat='media in config.media' ng-src='{{ media.url }}' type='{{ media.type }}'>
+        </video>
+    </div-->
+    
+    <div>
+    	<videogular
+    		vg-player-ready="onPlayerReady" vg-complete="onCompleteVideo" vg-update-time="onUpdateTime" vg-update-size="onUpdateSize" vg-update-volume="onUpdateVolume" vg-update-state="onUpdateState"
+			vg-width="config.width" vg-height="config.height" vg-theme="config.theme.url" vg-autoplay="config.autoPlay" vg-stretch="config.stretch.value" vg-responsive="true">
+			<video vg-src="config.sources" preload='metadata'></video>
+
+			<!--vg-ima-ads vg-network="config.plugins.ads.network" vg-unit-path="config.plugins.ads.unitPath" vg-companion="config.plugins.ads.companion" vg-companion-size="config.plugins.ads.companionSize" vg-ad-tag-url="config.plugins.ads.adTagUrl"></vg-ima-ads-->
+			<vg-poster-image vg-url='config.plugins.poster.url' vg-stretch="config.stretch.value"></vg-poster-image>
+			<vg-buffering></vg-buffering>
+			<vg-movie-selection></vg-movie-selection>
+			<!--vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play-->
+
+			<!--vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime" style="height: 50px;"-->
+				<!--vg-play-pause-button></vg-play-pause-button-->
+				<!--vg-timeDisplay>{{ currentTime }}</vg-timeDisplay-->
+				<!--vg-scrubBar>
+					<vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
+				</vg-scrubBar-->
+				<!--vg-timeDisplay>{{ totalTime }}</vg-timeDisplay-->
+				<!--vg-volume>
+					<vg-mutebutton></vg-mutebutton>
+					<vg-volumebar></vg-volumebar>
+				</vg-volume-->
+				<!--vg-fullscreenButton vg-enter-full-screen-icon="config.theme.enterFullScreenIcon" vg-exit-full-screen-icon="config.theme.exitFullScreenIcon"></vg-fullscreenButton-->
+			<!--/vg-controls-->
+		</videogular>
+	</div>
+    
+    <!--div id="video" videogular vg-width="config.width" vg-height="config.height" vg-theme="config.theme">
+        <video width="260" height="200" preload="none" vg-src="config.media">
+        </video>
+    </div-->
     <div style="padding:0.5em">
         <progress class="{{colorClass}}" value="{{currentTime}}" max="{{endTime}}"></progress>
     </div>

@@ -1,6 +1,20 @@
 'use strict';
 
-angular.module('Filmkampen', ['ngRoute','dropbox','ngResource','ngCookies'])
+angular.module('Filmkampen', 
+        [
+            'ngRoute',
+            'dropbox',
+            'ngResource',
+            'ngCookies',
+            'ngSanitize',
+            'com.2fdevs.videogular',
+    		'com.2fdevs.videogular.plugins.controls',
+			'com.2fdevs.videogular.plugins.overlayplay',
+			'com.2fdevs.videogular.plugins.buffering',
+			'com.2fdevs.videogular.plugins.poster',
+			'com.2fdevs.videogular.plugins.imaads',
+			'com.2fdevs.videogular.plugins.movieselection',
+			'angular.directives-round-progress'])
   .config(function ($locationProvider, $routeProvider, DropboxProvider) {
     $routeProvider
       .when('/', {
